@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Thêm sinh viên";
+}
+<h2>Thêm sinh viên</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>Student Code</label>
+        <input type="text" name="studentCode" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Full Name</label>
+        <input type="text" name="fullName" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Username</label>
+        <input type="text" name="username" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+    <button type="button" class="btn btn-secondary ms-2" onclick="window.history.back()">Back</button>
+</form>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div style="color:red">@ViewData.ModelState.Values.FirstOrDefault()?.Errors.FirstOrDefault()?.ErrorMessage</div>
+}
+

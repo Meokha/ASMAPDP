@@ -1,0 +1,29 @@
+@model SIMS.Models.Student
+@{
+    ViewData["Title"] = "Sửa sinh viên";
+}
+<h2>Sửa sinh viên</h2>
+<form method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="mb-3">
+        <label>Mã sinh viên</label>
+        <input type="text" name="studentCode" class="form-control" value="@Model.StudentCode" required />
+    </div>
+    <div class="mb-3">
+        <label>Họ tên</label>
+        <input type="text" name="fullName" class="form-control" value="@Model.FullName" required />
+    </div>
+    <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" value="@Model.Email" required />
+    </div>
+    <div class="mb-3">
+        <label>Tên đăng nhập</label>
+        <input type="text" name="username" class="form-control" value="@Model.User?.Username" required />
+    </div>
+    <div class="mb-3">
+        <label>Mật khẩu mới (để trống nếu không đổi)</label>
+        <input type="password" name="newPassword" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu</button>
+</form>

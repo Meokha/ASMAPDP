@@ -1,0 +1,17 @@
+@model SIMS.Models.Course
+@{
+    ViewData["Title"] = "Sửa khóa học";
+}
+<h2>Sửa khóa học</h2>
+<form method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div class="mb-3">
+        <label>Tên khóa học</label>
+        <input type="text" name="name" class="form-control" value="@Model.Name" required />
+    </div>
+    <div class="mb-3">
+        <label>Mô tả</label>
+        <input type="text" name="description" class="form-control" value="@Model.Description" />
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu</button>
+</form>

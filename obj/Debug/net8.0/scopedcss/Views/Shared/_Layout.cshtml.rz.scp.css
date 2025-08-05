@@ -1,0 +1,137 @@
+/* Giao diện glassmorphism nâng cấp, màu sắc tươi sáng hiện đại */
+
+body[b-nzfotznohn] {
+    min-height: 100vh;
+    background: linear-gradient(120deg, #fceabb 0%, #f8b500 50%, #f76d6d 100%);
+    background-attachment: fixed;
+    font-family: 'Poppins', Arial, sans-serif;
+    color: #222;
+}
+
+.navbar[b-nzfotznohn], .main-navbar[b-nzfotznohn] {
+    background: linear-gradient(90deg, #ffb347 0%, #ff5e62 100%);
+    /* cam sang hồng */
+    backdrop-filter: blur(16px);
+    border-radius: 0 0 22px 22px;
+    box-shadow: 0 8px 32px 0 rgba(255,94,98,0.10);
+    padding: 20px 40px;
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1.5px solid rgba(255,255,255,0.18);
+}
+
+a.navbar-brand[b-nzfotznohn], .main-navbar .brand[b-nzfotznohn] {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #fff !important;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 8px rgba(255,94,98,0.18);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a[b-nzfotznohn], .main-navbar .nav-link[b-nzfotznohn] {
+    color: #fff;
+    font-weight: 500;
+    margin-left: 28px;
+    text-decoration: none;
+    font-size: 1.08rem;
+    border-radius: 18px;
+    padding: 7px 18px;
+    transition: background 0.2s, color 0.2s;
+}
+
+a:hover[b-nzfotznohn], .main-navbar .nav-link:hover[b-nzfotznohn] {
+    background: rgba(255,255,255,0.18);
+    color: #222;
+    text-decoration: none;
+}
+
+.navbar-toggler[b-nzfotznohn] {
+    border: none;
+    background: rgba(255,255,255,0.3);
+    border-radius: 12px;
+}
+
+.btn-primary[b-nzfotznohn], .btn-submit[b-nzfotznohn] {
+    color: #fff !important;
+    background: linear-gradient(90deg, #ff5e62 0%, #ff9966 100%);
+    background-size: 200% auto;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 13px 36px;
+    box-shadow: 0 4px 16px rgba(255,94,98,0.10);
+    transition: all 0.4s;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary:hover[b-nzfotznohn], .btn-submit:hover[b-nzfotznohn] {
+    background-position: right center;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 10px 24px rgba(255,94,98,0.18);
+    color: #fff !important;
+}
+
+.footer[b-nzfotznohn] {
+    text-align: center;
+    color: #fff;
+    padding: 22px 0 10px 0;
+    font-size: 1.08rem;
+    opacity: 0.98;
+    background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+    /* tím sang hồng nhạt */
+    width: 100%;
+    margin-top: 40px;
+    letter-spacing: 0.5px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -4px 24px 0 rgba(161,140,209,0.10);
+}
+
+.main-content[b-nzfotznohn] {
+    padding-bottom: 60px; /* Đảm bảo không bị footer che */
+}
+
+.container[b-nzfotznohn], .main-content[b-nzfotznohn] {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 36px 18px 64px 18px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 22px;
+    box-shadow: 0 8px 32px 0 rgba(255,94,98,0.07);
+    backdrop-filter: blur(10px);
+}
+
+.border-top[b-nzfotznohn] {
+    border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-nzfotznohn] {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-nzfotznohn] {
+    box-shadow: 0 .25rem .75rem rgba(255,94,98, .05);
+}
+
+button.accept-policy[b-nzfotznohn] {
+    font-size: 1rem;
+    line-height: inherit;
+    border-radius: 18px;
+    padding: 8px 22px;
+    background: linear-gradient(90deg, #ffb347 0%, #ff5e62 100%);
+    color: #fff;
+    border: none;
+    font-weight: 500;
+}
+
+button.accept-policy:hover[b-nzfotznohn] {
+    background-position: right center;
+    opacity: 0.92;
+}
