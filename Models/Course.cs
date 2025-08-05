@@ -6,9 +6,8 @@ namespace SIMS.Models
     {
         public int Id { get; set; }
 
-        public required string Name { get; set; } = default!; // <-- Thêm = default!;
+        public required string Name { get; set; } = default!;
 
-        // Khai báo là nullable (string?) vì nó là tùy chọn
-        public string? Description { get; set; } // <-- Thêm dấu ?
+        public string? Description { get; set; } = default!;
     }
 }

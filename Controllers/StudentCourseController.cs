@@ -20,7 +20,7 @@ namespace SIMS.Controllers
             var courses = _context.Courses.ToList();
             var studentCourses = _context.StudentCourses
                 .Include(sc => sc.Student)
-                .ThenInclude(s => s.User) // Thêm dòng này để load cả thông tin User của Student
+                .ThenInclude(s => s.User)
                 .Include(sc => sc.Course)
                 .ToList();
             ViewBag.Students = students;
@@ -39,11 +39,8 @@ namespace SIMS.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        // PHƯƠNG THỨC DELETE ĐÃ ĐƯỢC SỬA LỖI
         public IActionResult Delete(int studentId, int courseId)
         {
-            // Tìm bản ghi dựa trên cả studentId và courseId
             var sc = _context.StudentCourses
                              .FirstOrDefault(sc => sc.StudentId == studentId && sc.CourseId == courseId);
             
@@ -57,7 +54,6 @@ namespace SIMS.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // Xem khóa học của sinh viên
         public IActionResult MyCourses()
         {
             var userId = HttpContext.Session.GetInt32("UserId");

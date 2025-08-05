@@ -1,87 +1,146 @@
-/* CSS riêng cho form đăng ký, chống xung đột, luôn đẹp */
+/* Register Form - Glassmorphism, Gradient, Modern UI - giống login */
 
-/* Reset cho vùng đăng ký */
-body, .register-page, .register-page * {
-    box-sizing: border-box;
-    font-family: 'Poppins', Arial, sans-serif !important;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 body.register-bg, .register-bg {
-    background: linear-gradient(120deg, #fbc2eb 0%, #a6c1ee 100%) !important;
-    background-attachment: fixed !important;
     min-height: 100vh;
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+    background-size: 600% 600%;
+    animation: gradient-animation 18s ease infinite;
+    font-family: 'Poppins', Arial, sans-serif !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
-    padding: 0;
+}
+
+@keyframes gradient-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.register-page {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .register-card {
-    border-radius: 28px !important;
-    box-shadow: 0 8px 32px 0 rgba(161,140,209,0.15) !important;
-    background: rgba(255,255,255,0.96) !important;
-    backdrop-filter: blur(12px) !important;
-    border: none !important;
-    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 22px;
+    border: 1.5px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 12px 40px 0 rgba(0,0,0,0.18), 0 1.5px 4px 0 rgba(255,255,255,0.08) inset;
+    color: #fff;
+    width: 92%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 36px 32px 32px 32px;
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95) translateY(20px);}
+    to { opacity: 1; transform: scale(1) translateY(0);}
 }
 
 .register-card-header {
-    border-radius: 28px 28px 0 0 !important;
-    font-weight: 700 !important;
-    letter-spacing: 1px;
-    font-size: 1.4rem;
-    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%) !important;
-    color: #fff !important;
-    box-shadow: 0 2px 12px 0 rgba(67,233,123,0.10);
+    background: transparent;
+    border-bottom: none;
     text-align: center;
-    border: none !important;
+    padding-top: 30px;
+    border-radius: 22px 22px 0 0;
 }
 
+.register-card-header h3 {
+    font-weight: 600;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Floating label effect */
 .register-form-label {
-    font-weight: 600 !important;
-    color: #a259c6 !important;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    font-weight: 400;
+    font-size: 1rem;
     letter-spacing: 0.5px;
-    margin-bottom: 4px;
 }
 
+.register-form-group {
+    position: relative;
+    margin-bottom: 2.2rem;
+}
+
+/* Input chỉ có gạch chân */
 .register-form-control {
-    border-radius: 18px !important;
-    border: 1.5px solid #e0c3fc !important;
-    font-size: 1.08rem !important;
-    padding: 12px 18px !important;
-    margin-bottom: 10px !important;
-    background: rgba(255,255,255,0.85) !important;
-    transition: border 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(161,140,209,0.05);
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 0;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .register-form-control:focus {
-    border-color: #a259c6 !important;
-    box-shadow: 0 0 0 3px #fbc2eb44 !important;
-    background: #fff !important;
+    outline: none;
+    border-bottom-color: #fff;
+    background: transparent;
 }
 
+/* Label nổi lên khi focus hoặc đã có chữ */
+.register-form-control:focus + .register-form-label,
+.register-form-control:not(:placeholder-shown) + .register-form-label {
+    top: -15px;
+    left: 0;
+    font-size: 0.8rem;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Nút gradient bo tròn */
 .register-btn-success {
-    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%) !important;
-    border: none !important;
-    font-weight: 700 !important;
-    border-radius: 50px !important;
-    font-size: 1.15rem !important;
-    letter-spacing: 0.5px;
-    padding: 12px 0 !important;
-    box-shadow: 0 4px 16px rgba(67,233,123,0.10);
     width: 100%;
-    color: #fff !important;
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #833ab4, #fd1d1d, #fcb045);
+    background-size: 200% auto;
+    color: white !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 16px rgba(252,176,69,0.10);
+    margin-bottom: 10px;
 }
 
 .register-btn-success:hover {
-    background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%) !important;
-    transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 8px 24px rgba(67,233,123,0.18);
-    color: #fff !important;
+    background-position: right center;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(252,176,69,0.18);
 }
 
-a.register-login-link, .register-login-link {
+/* Link quay lại đăng nhập */
+.register-login-link {
     background: none !important;
-    color: #a259c6 !important;
+    color: #fff !important;
     border: none !important;
     border-radius: 0 !important;
     font-weight: 600 !important;
@@ -96,26 +155,29 @@ a.register-login-link, .register-login-link {
     transition: color 0.2s;
 }
 
-a.register-login-link:hover, .register-login-link:hover {
-    color: #43e97b !important;
+.register-login-link:hover {
+    color: #fcb045 !important;
     text-decoration: underline !important;
     background: none !important;
     transform: none !important;
 }
 
+/* Thông báo lỗi */
 .alert-danger {
     border-radius: 18px !important;
     font-size: 1.05rem !important;
-    background: linear-gradient(90deg, #fbc2eb 0%, #a6c1ee 100%) !important;
-    color: #a259c6 !important;
-    border: none !important;
+    background: rgba(255,255,255,0.1) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 0, 0, 0.5) !important;
     box-shadow: 0 2px 8px rgba(161,140,209,0.10) !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 @media (max-width: 600px) {
     .register-card {
         border-radius: 16px !important;
-        margin-top: 10px !important;
+        max-width: 98vw;
+        padding: 18px 8px 18px 8px !important;
     }
     .register-card-header {
         border-radius: 16px 16px 0 0 !important;
@@ -123,6 +185,6 @@ a.register-login-link:hover, .register-login-link:hover {
     }
     .register-form-control {
         font-size: 1rem !important;
-        padding: 10px 12px !important;
+        padding: 10px 0 !important;
     }
 }

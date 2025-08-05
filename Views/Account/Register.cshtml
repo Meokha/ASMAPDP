@@ -1,6 +1,8 @@
 @{
     ViewData["Title"] = "Đăng ký";
+    Layout = null; // Không dùng layout, sẽ không có navbar/menu/footer
 }
+<link rel="stylesheet" href="~/css/register-form.css" />
 <body class="register-bg">
 <div class="row justify-content-center mt-5 register-page">
     <div class="col-md-6">
@@ -10,28 +12,28 @@
             </div>
             <div class="card-body">
                 <form method="post">
-                    <div class="mb-3">
-                        <label class="form-label register-form-label">Username</label>
-                        <input type="text" name="username" class="form-control register-form-control" required />
+                    <div class="register-form-group">
+                        <input type="text" name="username" class="register-form-control" required placeholder=" " />
+                        <label class="register-form-label">Username</label>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label register-form-label">Password</label>
-                        <input type="password" name="password" class="form-control register-form-control" required />
+                    <div class="register-form-group">
+                        <input type="password" name="password" class="register-form-control" required placeholder=" " />
+                        <label class="register-form-label">Password</label>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label register-form-label">Full Name</label>
-                        <input type="text" name="fullName" class="form-control register-form-control" required />
+                    <div class="register-form-group">
+                        <input type="text" name="fullName" class="register-form-control" required placeholder=" " />
+                        <label class="register-form-label">Full Name</label>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label register-form-label">Email</label>
-                        <input type="email" name="email" class="form-control register-form-control" required />
+                    <div class="register-form-group">
+                        <input type="email" name="email" class="register-form-control" required placeholder=" " />
+                        <label class="register-form-label">Email</label>
                     </div>
                     <button type="submit" class="btn register-btn-success mb-2">
                         <i class="bi bi-person-plus-fill"></i> Register
                     </button>
                     <div class="d-flex justify-content-center mt-3">
                         <a href="@Url.Action("Login", "Account")" class="register-login-link">
-                            <i class="bi bi-arrow-left-circle"></i> Đã có tài khoản? Quay lại đăng nhập
+                            <i class="bi bi-arrow-left-circle"></i> already have an account? Go back to login
                         </a>
                     </div>
                 </form>

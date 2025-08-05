@@ -24,7 +24,7 @@ namespace SIMS.Controllers
         {
             if (_context.Users.Any(u => u.Username == username))
             {
-                ModelState.AddModelError("", "Username đã tồn tại");
+                ModelState.AddModelError("", "Username already exists");
                 return View();
             }
 
@@ -52,7 +52,8 @@ namespace SIMS.Controllers
 
             HttpContext.Session.SetInt32("UserId", user.Id);
             HttpContext.Session.SetString("Role", user.Role);
-            return RedirectToAction("Index", "Home");
+            TempData["RegisterSuccess"] = "Register successful! You can now log in.";
+             return RedirectToAction("Login");
         }
 
         public IActionResult Login()

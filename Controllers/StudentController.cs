@@ -30,7 +30,7 @@ namespace SIMS.Controllers
         {
             if (_context.Users.Any(u => u.Username == username))
             {
-                ModelState.AddModelError("", "Username đã tồn tại");
+                ModelState.AddModelError("", "Username already exists");
                 return View();
             }
             // Mã hóa mật khẩu

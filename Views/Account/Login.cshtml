@@ -29,6 +29,12 @@
                 {
                     <div class="alert mt-3 text-center">@ViewData.ModelState.Values.FirstOrDefault()?.Errors.FirstOrDefault()?.ErrorMessage</div>
                 }
+                @if (TempData["RegisterSuccess"] != null)
+                {
+                    <div class="alert alert-success text-center">
+                        @TempData["RegisterSuccess"]
+                    </div>
+                }
             </div>
         </div>
     </div>
