@@ -54,12 +54,12 @@
                     <td>@sc.Student?.FullName (@sc.Student?.User?.Username)</td>
                     <td>@sc.Course?.Name</td>
                     <td>
-                        <!-- DÒNG NÀY ĐÃ ĐƯỢC SỬA LỖI -->
                         <a asp-controller="StudentCourse" 
                            asp-action="Delete" 
                            asp-route-studentId="@sc.StudentId" 
                            asp-route-courseId="@sc.CourseId" 
-                           class="btn btn-danger btn-sm">
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure you want to remove this assignment?');">
                             <i class="bi bi-trash"></i> Delete
                         </a>
                     </td>
