@@ -119,6 +119,7 @@ C:\Users\ASUS\Downloads\Visuastudio code\SIMS\obj\Debug\net8.0\SIMS.csproj.CoreC
 C:\Users\ASUS\Downloads\Visuastudio code\SIMS\obj\Debug\net8.0\SIMS.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ASUS\Downloads\Visuastudio code\SIMS\obj\Debug\net8.0\SIMS.RazorAssemblyInfo.cache
 C:\Users\ASUS\Downloads\Visuastudio code\SIMS\obj\Debug\net8.0\SIMS.RazorAssemblyInfo.cs
+C:\Users\ASUS\Downloads\Visuastudio code\SIMS\obj\Debug\net8.0\SIMS.sourcelink.json
 C:\Users\ASUS\Downloads\Visuastudio code\SIMS\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\ASUS\Downloads\Visuastudio code\SIMS\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\ASUS\Downloads\Visuastudio code\SIMS\obj\Debug\net8.0\staticwebassets\msbuild.SIMS.Microsoft.AspNetCore.StaticWebAssets.props

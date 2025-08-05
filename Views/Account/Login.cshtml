@@ -20,7 +20,11 @@
                         <label class="form-label">Password</label>
                     </div>
                     <button type="submit" class="btn-submit"><i class="bi bi-box-arrow-in-right"></i> Login </button>
-                </form>
+                    <a href="@Url.Action("Register", "Account")" class="btn btn-register">
+                        <i class="bi bi-person-plus"></i>
+                        <span class="register-text">Do you want to create an Account?</span>
+                    </a>
+                    </form>
                 @if (!ViewData.ModelState.IsValid)
                 {
                     <div class="alert mt-3 text-center">@ViewData.ModelState.Values.FirstOrDefault()?.Errors.FirstOrDefault()?.ErrorMessage</div>

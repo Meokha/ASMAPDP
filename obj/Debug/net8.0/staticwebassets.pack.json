@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\custom-login.css"
     },
     {
+      "Id": "C:\\Users\\ASUS\\Downloads\\Visuastudio code\\SIMS\\wwwroot\\css\\register-form.css",
+      "PackagePath": "staticwebassets\\css\\register-form.css"
+    },
+    {
       "Id": "C:\\Users\\ASUS\\Downloads\\Visuastudio code\\SIMS\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

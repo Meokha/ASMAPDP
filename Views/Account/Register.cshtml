@@ -1,37 +1,48 @@
 @{
     ViewData["Title"] = "Đăng ký";
 }
-<div class="row justify-content-center mt-5">
+<body class="register-bg">
+<div class="row justify-content-center mt-5 register-page">
     <div class="col-md-6">
-        <div class="card shadow">
-            <div class="card-header bg-success text-white text-center">
+        <div class="card shadow register-card">
+            <div class="card-header register-card-header">
                 <h3><i class="bi bi-person-plus-fill"></i> Register</h3>
             </div>
             <div class="card-body">
                 <form method="post">
                     <div class="mb-3">
-                        <label class="form-label">Username</label>
-                        <input type="text" name="username" class="form-control" required />
+                        <label class="form-label register-form-label">Username</label>
+                        <input type="text" name="username" class="form-control register-form-control" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" required />
+                        <label class="form-label register-form-label">Password</label>
+                        <input type="password" name="password" class="form-control register-form-control" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Full Name</label>
-                        <input type="text" name="fullName" class="form-control" required />
+                        <label class="form-label register-form-label">Full Name</label>
+                        <input type="text" name="fullName" class="form-control register-form-control" required />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" required />
+                        <label class="form-label register-form-label">Email</label>
+                        <input type="email" name="email" class="form-control register-form-control" required />
                     </div>
-                    <button type="submit" class="btn btn-success w-100"><i class="bi bi-person-plus-fill"></i> Register</button>
+                    <button type="submit" class="btn register-btn-success mb-2">
+                        <i class="bi bi-person-plus-fill"></i> Register
+                    </button>
+                    <div class="d-flex justify-content-center mt-3">
+                        <a href="@Url.Action("Login", "Account")" class="register-login-link">
+                            <i class="bi bi-arrow-left-circle"></i> Đã có tài khoản? Quay lại đăng nhập
+                        </a>
+                    </div>
                 </form>
                 @if (!ViewData.ModelState.IsValid)
                 {
-                    <div class="alert alert-danger mt-3 text-center">@ViewData.ModelState.Values.FirstOrDefault()?.Errors.FirstOrDefault()?.ErrorMessage</div>
+                    <div class="alert alert-danger mt-3 text-center">
+                        @ViewData.ModelState.Values.FirstOrDefault()?.Errors.FirstOrDefault()?.ErrorMessage
+                    </div>
                 }
             </div>
         </div>
     </div>
 </div>
+</body>

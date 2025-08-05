@@ -1,7 +1,7 @@
 @{
     ViewData["Title"] = "Thêm sinh viên";
 }
-<h2>Thêm sinh viên</h2>
+<h2>Create Student</h2>
 <form method="post">
     <div class="mb-3">
         <label>Student Code</label>
@@ -24,7 +24,7 @@
         <input type="password" name="password" class="form-control" required />
     </div>
     <button type="submit" class="btn btn-primary">Add</button>
-    <button type="button" class="btn btn-secondary ms-2" onclick="window.history.back()">Back</button>
+<button type="button" class="btn btn-back ms-2" onclick="window.history.back()">Back</button>
 </form>
 @if (!ViewData.ModelState.IsValid)
 {

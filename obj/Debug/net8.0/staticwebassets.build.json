@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9ZdhMAGtCeqHFch2ilJrzCKGypgrFs8htkobaysDkv0=",
+  "Hash": "NazK5o7G/kGTXYoK02LuS9gu5eBR+4EqFxbKR6e/kCI=",
   "Source": "SIMS",
   "BasePath": "_content/SIMS",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\custom-login.css"
+    },
+    {
+      "Identity": "C:\\Users\\ASUS\\Downloads\\Visuastudio code\\SIMS\\wwwroot\\css\\register-form.css",
+      "SourceId": "SIMS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ASUS\\Downloads\\Visuastudio code\\SIMS\\wwwroot\\",
+      "BasePath": "_content/SIMS",
+      "RelativePath": "css/register-form.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\register-form.css"
     },
     {
       "Identity": "C:\\Users\\ASUS\\Downloads\\Visuastudio code\\SIMS\\wwwroot\\css\\site.css",

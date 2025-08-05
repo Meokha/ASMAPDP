@@ -150,3 +150,12 @@ html, body {
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     border-radius: 8px;
 }
+.register-text {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: #ffffff; /* tím pastel, bạn có thể đổi màu khác */
+    font-weight: 600;
+    font-size: 1.08rem;
+    letter-spacing: 0.5px;
+}
