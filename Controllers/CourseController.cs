@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using SIMS.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SIMS.Controllers
 {
+    [Authorize] // Yêu cầu đăng nhập
     public class CourseController : Controller
     {
         private readonly SIMSDbContext _context;
@@ -11,34 +13,45 @@ namespace SIMS.Controllers
         {
             _context = context;
         }
+
+        // Mọi người dùng đã đăng nhập đều có thể xem
         public IActionResult Index()
         {
             var courses = _context.Courses.ToList();
             return View(courses);
         }
-        public IActionResult Create()
+
+        public IActionResult Details(int id)
         {
-            return View();
+            var course = _context.Courses.FirstOrDefault(m => m.Id == id);
+            if (course == null) return NotFound();
+            return View(course);
         }
+
+        // === THAY ĐỔI QUAN TRỌNG: Chỉ Teacher được quản lý ===
+        [Authorize(Roles = "Teacher")]
+        public IActionResult Create() => View();
+
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         public IActionResult Create(string name, string description)
         {
-            var course = new Course
-            {
-                Name = name,
-                Description = description
-            };
+            var course = new Course { Name = name, Description = description };
             _context.Courses.Add(course);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [Authorize(Roles = "Teacher")]
         public IActionResult Edit(int id)
         {
             var course = _context.Courses.Find(id);
             if (course == null) return NotFound();
             return View(course);
         }
+
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         public IActionResult Edit(int id, string name, string description)
         {
             var course = _context.Courses.Find(id);
@@ -48,12 +61,17 @@ namespace SIMS.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        public IActionResult Delete(int id)
+
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Teacher")]
+        public IActionResult DeleteConfirmed(int id)
         {
             var course = _context.Courses.Find(id);
-            if (course == null) return NotFound();
-            _context.Courses.Remove(course);
-            _context.SaveChanges();
+            if (course != null)
+            {
+                _context.Courses.Remove(course);
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }

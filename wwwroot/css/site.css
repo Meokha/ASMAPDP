@@ -1,174 +1,96 @@
-/* Giao diện glassmorphism nâng cấp, màu sắc tươi sáng hiện đại */
-
 body {
     min-height: 100vh;
-    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 50%, #d4fc79 100%);
+    background: linear-gradient(120deg, #ffecd2 0%, #fcb69f 50%, #ff6f61 100%);
     background-attachment: fixed;
     font-family: 'Poppins', Arial, sans-serif;
     color: #222;
+    position: relative;
+    padding-bottom: 50px;
 }
 
+/* Navbar */
 .navbar, .main-navbar {
-    background: linear-gradient(90deg, #e0c3fc 0%, #8ec5fc 100%);
-    backdrop-filter: blur(16px);
+    background: linear-gradient(90deg, #ff7e5f 0%, #eb3349 100%);
+    backdrop-filter: blur(12px);
     border-radius: 0 0 22px 22px;
-    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
-    padding: 20px 40px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    padding: 8px 25px;
     margin-bottom: 36px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1.5px solid rgba(255,255,255,0.18);
+    border: none;
+    position: relative;
+    z-index: 1030;
 }
 
 a.navbar-brand, .main-navbar .brand {
     font-weight: 700;
-    font-size: 2rem;
-    color: #a259c6 !important;
-    letter-spacing: 1.5px;
-    text-shadow: 0 2px 8px rgba(30,144,255,0.08);
-    text-decoration: none;
-    transition: color 0.2s;
+    font-size: 1.8rem;
+    color: #fff !important;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-a, .main-navbar .nav-link {
-    color: #a259c6;
+.nav-link {
+    color: #fff;
     font-weight: 500;
-    margin-left: 28px;
-    text-decoration: none;
-    font-size: 1.08rem;
+    margin-left: 20px;
+    font-size: 1rem;
     border-radius: 18px;
-    padding: 7px 18px;
+    padding: 7px 15px;
+    transition: background 0.2s, color 0.2s;
+}
+.nav-link:hover, .dropdown-item:hover {
+    background: rgba(255,255,255,0.25);
+    color: #fff !important;
 }
 
-a:hover, .main-navbar .nav-link:hover {
-    background: rgba(30,144,255,0.10);
-    color: #fcb045;
-    text-decoration: none;
-}
-
-.navbar-toggler {
-    border: none;
-    background: rgba(255,255,255,0.3);
-    border-radius: 12px;
-}
-
+/* Buttons */
 .btn-primary, .btn-submit {
     color: #fff !important;
-    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 50%, #1e90ff 100%);
-    background-size: 200% auto;
+    background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
     border: none;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 1.1rem;
-    padding: 13px 36px;
-    box-shadow: 0 4px 16px rgba(30,144,255,0.10);
-    transition: all 0.4s;
-    letter-spacing: 0.5px;
+    padding: 10px 30px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    transition: all 0.3s;
 }
-
 .btn-primary:hover, .btn-submit:hover {
     background-position: right center;
-    transform: translateY(-3px) scale(1.04);
-    box-shadow: 0 10px 24px rgba(30,144,255,0.18);
-    color: #fff !important;
+    transform: translateY(-2px);
 }
 
+/* Footer */
 .footer {
     text-align: center;
     color: #fff;
-    padding: 22px 0 10px 0;
-    font-size: 1.08rem;
-    opacity: 0.96;
-    background: linear-gradient(90deg, #fcb045 0%, #fd1d1d 100%);
-    /* cam sang đỏ */
+    padding: 6px 0;
+    font-size: 0.8rem;
+    background: linear-gradient(90deg, #654ea3 0%, #eaafc8 100%);
     width: 100%;
-    margin-top: 40px;
-    letter-spacing: 0.5px;
-    position: fixed;
-    left: 0;
+    position: absolute;
     bottom: 0;
-    z-index: 100;
-    border-radius: 18px 18px 0 0;
-    box-shadow: 0 -4px 24px 0 rgba(252,176,69,0.10);
+    left: 0;
+    border-radius: 0;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
 }
-.main-content {
-    padding-bottom: 60px; /* Đảm bảo không bị footer che */
+.footer a {
+    color: #fff;
+    font-weight: bold;
+}
+.footer a:hover {
+    text-decoration: underline;
 }
 
+/* Container */
 .container, .main-content {
     max-width: 980px;
     margin: 0 auto;
-    padding: 36px 18px 64px 18px;
-    background: rgba(255,255,255,0.18);
+    padding: 12px 18px;
+    background: rgba(255,255,255,0.35);
     border-radius: 22px;
-    box-shadow: 0 8px 32px 0 rgba(30,144,255,0.07);
-    backdrop-filter: blur(10px);
-}
-
-.border-top {
-    border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(30,144,255, .05);
-}
-
-button.accept-policy {
-    font-size: 1rem;
-    line-height: inherit;
-    border-radius: 18px;
-    padding: 8px 22px;
-    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
-    color: #fff;
-    border: none;
-    font-weight: 500;
-}
-
-button.accept-policy:hover {
-    background-position: right center;
-    opacity: 0.92;
-}
-/* Thêm vào site.css hoặc _Layout.cshtml.css */
-.btn-back {
-    background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
-    color: #fff !important;
-    border: none;
-    border-radius: 50px;
-    font-weight: 500;
-    padding: 8px 28px;
-    box-shadow: 0 2px 8px rgba(161,140,209,0.10);
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-}
-
-.btn-back:hover {
-    background: linear-gradient(90deg, #fbc2eb 0%, #a18cd1 100%);
-    color: #222 !important;
-    transform: translateY(-2px) scale(1.04);
-    text-decoration: none;
-}
-/* CSS cho nút đăng ký riêng */
-.btn-register {
-    background: linear-gradient(90deg, #ff9966 0%, #ff5e62 100%);
-    color: #fff !important;
-    border: none;
-    border-radius: 50px;
-    font-weight: 500;
-    padding: 8px 28px;
-    box-shadow: 0 2px 8px rgba(255,94,98,0.10);
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-}
-
-.btn-register:hover {
-    background: linear-gradient(90deg, #ff5e62 0%, #ff9966 100%);
-    color: #222 !important;
-    transform: translateY(-2px) scale(1.04);
-    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    backdrop-filter: blur(6px);
 }

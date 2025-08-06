@@ -4,48 +4,64 @@
     background-attachment: fixed;
     font-family: 'Poppins', Arial, sans-serif;
     color: #222;
+    position: relative;
+    padding-bottom: 50px; /* Chừa khoảng trống cho footer */
 }
+
 .navbar, .main-navbar {
     background: linear-gradient(90deg, #ffb347 0%, #ff5e62 100%);
     backdrop-filter: blur(16px);
     border-radius: 0 0 22px 22px;
     box-shadow: 0 8px 32px 0 rgba(255,94,98,0.10);
-    padding: 20px 40px;
+    padding: 8px 25px;
     margin-bottom: 36px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border: 1.5px solid rgba(255,255,255,0.18);
+    position: relative;
+    z-index: 1030;
 }
+
 a.navbar-brand, .main-navbar .brand {
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #fff !important;
     letter-spacing: 1.5px;
     text-shadow: 0 2px 8px rgba(255,94,98,0.18);
     text-decoration: none;
     transition: color 0.2s;
 }
-a, .main-navbar .nav-link {
+
+.nav-link {
     color: #fff;
     font-weight: 500;
-    margin-left: 28px;
+    margin-left: 20px;
     text-decoration: none;
-    font-size: 1.08rem;
+    font-size: 1rem;
     border-radius: 18px;
-    padding: 7px 18px;
+    padding: 7px 15px;
     transition: background 0.2s, color 0.2s;
 }
-a:hover, .main-navbar .nav-link:hover {
+
+a:hover, .main-navbar .nav-link:hover, .dropdown-item:hover {
     background: rgba(255,255,255,0.18);
-    color: #222;
+    color: #222 !important;
     text-decoration: none;
 }
+
+.dropdown-menu {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
 .navbar-toggler {
     border: none;
     background: rgba(255,255,255,0.3);
     border-radius: 12px;
 }
+
 .btn-primary, .btn-submit {
     color: #fff !important;
     background: linear-gradient(90deg, #ff5e62 0%, #ff9966 100%);
@@ -53,57 +69,71 @@ a:hover, .main-navbar .nav-link:hover {
     border: none;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 1.1rem;
-    padding: 13px 36px;
+    font-size: 1rem;
+    padding: 10px 30px;
     box-shadow: 0 4px 16px rgba(255,94,98,0.10);
     transition: all 0.4s;
-    letter-spacing: 0.5px;
 }
+
 .btn-primary:hover, .btn-submit:hover {
     background-position: right center;
-    transform: translateY(-3px) scale(1.04);
+    transform: translateY(-2px);
     box-shadow: 0 10px 24px rgba(255,94,98,0.18);
     color: #fff !important;
 }
+
 .footer {
     text-align: center;
     color: #fff;
-    padding: 22px 0 10px 0;
-    font-size: 1.08rem;
-    opacity: 0.98;
-    background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
-    /* tím sang hồng nhạt */
+    padding: 5px 0;
+    font-size: 0.75rem;
+    background: linear-gradient(90deg, #ff9a8b 0%, #ff6a88 50%, #ff99ac 100%);
     width: 100%;
-    margin-top: 40px;
-    letter-spacing: 0.5px;
-    position: fixed;
-    left: 0;
+    position: absolute;
     bottom: 0;
-    z-index: 100;
-    border-radius: 18px 18px 0 0;
-    box-shadow: 0 -4px 24px 0 rgba(161,140,209,0.10);
+    left: 0;
+    border-radius: 0;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(255,255,255,0.2);
 }
+.footer a {
+    color: #fff;
+    font-weight: bold;
+}
+.footer a:hover {
+    text-decoration: underline;
+    color: #fff;
+    background: none;
+}
+
 .main-content {
-    padding-bottom: 60px; /* Đảm bảo không bị footer che */
+    padding-bottom: 0;
 }
+
+/* === ĐÂY LÀ THAY ĐỔI QUAN TRỌNG NHẤT === */
 .container, .main-content {
     max-width: 980px;
     margin: 0 auto;
-    padding: 36px 18px 64px 18px;
-    background: rgba(255,255,255,0.18);
+    padding: 36px 18px; /* Bỏ đi padding-bottom 64px ở đây */
+    background: rgba(255, 255, 255, 0.18);
     border-radius: 22px;
-    box-shadow: 0 8px 32px 0 rgba(255,94,98,0.07);
+    box-shadow: 0 8px 32px 0 rgba(30, 144, 255, 0.07);
     backdrop-filter: blur(10px);
 }
+/* ======================================= */
+
 .border-top {
     border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
     border-bottom: 1px solid #e5e5e5;
 }
+
 .box-shadow {
     box-shadow: 0 .25rem .75rem rgba(255,94,98, .05);
 }
+
 button.accept-policy {
     font-size: 1rem;
     line-height: inherit;
@@ -114,10 +144,12 @@ button.accept-policy {
     border: none;
     font-weight: 500;
 }
+
 button.accept-policy:hover {
     background-position: right center;
     opacity: 0.92;
 }
+
 .btn-back {
     background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
     color: #fff !important;
@@ -127,8 +159,9 @@ button.accept-policy:hover {
     padding: 8px 28px;
     box-shadow: 0 2px 8px rgba(161,140,209,0.10);
 }
+
 .btn-back:hover {
     background: linear-gradient(90deg, #fbc2eb 0%, #a18cd1 100%);
     color: #222 !important;
-    transform: translateY(-2px) scale(1.04);
+    transform: translateY(-2px);
 }

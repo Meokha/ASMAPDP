@@ -66,9 +66,20 @@ namespace SIMS.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Students");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "student1@sims.local",
+                            FullName = "Student One",
+                            StudentCode = "SV001",
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("SIMS.Models.StudentCourse", b =>
@@ -84,6 +95,46 @@ namespace SIMS.Migrations
                     b.HasIndex("CourseId");
 
                     b.ToTable("StudentCourses");
+                });
+
+            modelBuilder.Entity("SIMS.Models.Teacher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Specialization")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Teachers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "teacher1@sims.local",
+                            FullName = "Teacher One",
+                            Specialization = "Mathematics",
+                            UserId = 2
+                        });
                 });
 
             modelBuilder.Entity("SIMS.Models.User", b =>
@@ -119,17 +170,33 @@ namespace SIMS.Migrations
                         {
                             Id = 1,
                             Email = "admin@sims.local",
-                            PasswordHash = "$2a$11$MmGKFYHinEBH448AL3Tisu20ww4OyeMw5rI5G091jXiszo9kFWJYi",
+                            PasswordHash = "$2a$11$96hyzkhmHpBybPA00VAYo.xe7bHnuXHAyVdrGk00jPxX1fDbV1GhC",
                             Role = "Admin",
                             Username = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "teacher1@sims.local",
+                            PasswordHash = "$2a$11$cfxE37S5QCOl7h19Dvl5H.BGjFbigN2OAk3mNZymwUTqbV/Sv1SNC",
+                            Role = "Teacher",
+                            Username = "teacher1"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "student1@sims.local",
+                            PasswordHash = "$2a$11$Jjg3L9Nne0zolhPMsnog4ui7p86PxijzvGxbUZDdSv00P9asX2AGq",
+                            Role = "Student",
+                            Username = "student1"
                         });
                 });
 
             modelBuilder.Entity("SIMS.Models.Student", b =>
                 {
                     b.HasOne("SIMS.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithOne()
+                        .HasForeignKey("SIMS.Models.Student", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -153,6 +220,17 @@ namespace SIMS.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("SIMS.Models.Teacher", b =>
+                {
+                    b.HasOne("SIMS.Models.User", "User")
+                        .WithOne()
+                        .HasForeignKey("SIMS.Models.Teacher", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

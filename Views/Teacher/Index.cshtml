@@ -1,0 +1,53 @@
+@model IEnumerable<SIMS.Models.Course>
+
+@{
+    ViewData["Title"] = "Danh Sách Khóa Học";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>@ViewData["Title"]</h1>
+    @* Nút "Thêm mới" chỉ hiển thị cho Teacher *@
+    @if (User.IsInRole("Teacher"))
+    {
+        <a asp-action="Create" class="btn btn-primary">Thêm Khóa Học Mới</a>
+    }
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Tên Khóa Học</th>
+                <th>Mô Tả</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td class="text-end">
+                        @* Nút "Chi tiết" hiển thị cho tất cả mọi người *@
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Xem Chi tiết</a>
+
+                        @* Các nút quản lý chỉ hiển thị cho Teacher *@
+                        @if (User.IsInRole("Teacher"))
+                        {
+                            <text> | </text>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Sửa</a>
+                            <text> | </text>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Xóa</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">Chưa có khóa học nào để hiển thị.</div>
+}

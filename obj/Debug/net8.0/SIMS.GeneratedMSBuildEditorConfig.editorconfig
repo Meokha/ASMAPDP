@@ -26,6 +26,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Admin/ManageStudents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlU3R1ZGVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Admin/ManageTeachers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlVGVhY2hlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Course/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -54,6 +66,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/StudentCourse/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudENvdXJzZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/StudentCourse/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudENvdXJzZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -66,12 +82,48 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Student/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Student/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Student/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/TeacherManagement/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlck1hbmFnZW1lbnRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/TeacherManagement/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlck1hbmFnZW1lbnRcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/TeacherManagement/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlck1hbmFnZW1lbnRcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/TeacherManagement/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlck1hbmFnZW1lbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Teacher/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Teacher/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Teacher/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/Teacher/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ASUS/Downloads/Visuastudio code/SIMS/Views/_ViewImports.cshtml]

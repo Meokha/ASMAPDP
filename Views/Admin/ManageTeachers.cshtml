@@ -1,0 +1,66 @@
+@model IEnumerable<SIMS.Models.Teacher>
+
+@{
+    ViewData["Title"] = "Quản Lý Giáo Viên";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    @* Chúng ta sẽ cần tạo action Create cho Teacher sau *@
+    @* <a asp-action="CreateTeacher" class="btn btn-primary">Thêm Giáo Viên Mới</a> *@
+</p>
+
+@if (!Model.Any())
+{
+    <p>Chưa có dữ liệu giáo viên.</p>
+}
+else
+{
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Họ và Tên
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Chuyên Ngành
+                </th>
+                <th>
+                    Tên Đăng Nhập
+                </th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Specialization)
+                    </td>
+                    <td>
+                        @* Kiểm tra để tránh lỗi nếu User không được load cùng *@
+                        @(item.User?.Username ?? "N/A")
+                    </td>
+                    <td>
+                        @* Các link này cần được cài đặt trong tương lai *@
+                        @* <a asp-action="EditTeacher" asp-route-id="@item.Id" class="btn btn-sm btn-info">Sửa</a> |
+                        <a asp-action="DetailsTeacher" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Chi tiết</a> |
+                        <a asp-action="DeleteTeacher" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Xóa</a> *@
+                        <span>Chưa có hành động</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

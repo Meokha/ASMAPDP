@@ -1,0 +1,37 @@
+@model IEnumerable<SIMS.Models.Student>
+
+@{
+    ViewData["Title"] = "Manage Students";
+}
+
+<h1>Manage Students</h1>
+
+<p>
+    <a asp-controller="Student" asp-action="Create" class="btn btn-primary">Create New Student</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Student Code</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.StudentCode)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.User.Username)</td>
+                <td>
+                    <a asp-controller="Student" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Student" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

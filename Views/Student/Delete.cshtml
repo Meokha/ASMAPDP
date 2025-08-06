@@ -1,0 +1,45 @@
+@model SIMS.Models.Student
+
+@{
+    ViewData["Title"] = "Xác nhận Xóa Sinh Viên";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3 class="text-danger">Bạn có chắc chắn muốn xóa sinh viên này không?</h3>
+<p class="text-danger">Hành động này sẽ xóa vĩnh viễn cả tài khoản đăng nhập của sinh viên.</p>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-3">
+            Họ và Tên
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        <dt class = "col-sm-3">
+            Mã Sinh Viên
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.StudentCode)
+        </dd>
+        <dt class = "col-sm-3">
+            Email
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-3">
+            Tên đăng nhập
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.User.Username)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Xóa Vĩnh Viễn" class="btn btn-danger" /> |
+        <a asp-action="Index">Quay lại danh sách</a>
+    </form>
+</div>

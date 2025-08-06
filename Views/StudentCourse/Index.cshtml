@@ -1,70 +1,102 @@
 @model IEnumerable<SIMS.Models.StudentCourse>
+
 @{
-    ViewData["Title"] = "Gán khóa học cho sinh viên";
-    var students = ViewBag.Students as List<SIMS.Models.Student>;
-    var courses = ViewBag.Courses as List<SIMS.Models.Course>;
+    ViewData["Title"] = "Xếp Lớp Sinh Viên";
+    // Thay vì dùng biến trung gian, chúng ta sẽ kiểm tra trực tiếp ViewBag
 }
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 class="text-primary"><i class="bi bi-link-45deg"></i> Assign Courses to Students</h2>
-</div>
-<form method="post" action="@Url.Action("Assign")" class="row g-3 mb-4 align-items-end">
-    <div class="col-md-5">
-        <label class="form-label">Select Student</label>
-        <select name="studentId" class="form-select" required>
-            <option value="">Select Student</option>
-            @if (students != null)
-            {
-                @foreach (var s in students)
-                {
-                    <option value="@s.Id">@s.FullName (@s.User?.Username)</option>
-                }
-            }
-        </select>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h4>Gán Sinh Viên vào Khóa Học</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Assign" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <div class="mb-3">
+                        <label for="studentId" class="form-label">Chọn Sinh Viên</label>
+                        <select name="studentId" id="studentId" class="form-select" required>
+                            <option value="">-- Vui lòng chọn --</option>
+
+                            @* === BẮT ĐẦU PHẦN SỬA QUAN TRỌNG === *@
+                            @if (ViewBag.Students != null)
+                            {
+                                @* Ép kiểu trực tiếp trong vòng lặp để chắc chắn *@
+                                @foreach (var student in (IEnumerable<SIMS.Models.Student>)ViewBag.Students)
+                                {
+                                    <option value="@student.Id">@student.FullName (@student.StudentCode)</option>
+                                }
+                            }
+                            @* === KẾT THÚC PHẦN SỬA QUAN TRỌNG === *@
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="courseId" class="form-label">Chọn Khóa Học</label>
+                        <select name="courseId" id="courseId" class="form-select" required>
+                            <option value="">-- Vui lòng chọn --</option>
+                            @if (ViewBag.Courses != null)
+                            {
+                                @foreach (var course in (IEnumerable<SIMS.Models.Course>)ViewBag.Courses)
+                                {
+                                    <option value="@course.Id">@course.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Gán</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="col-md-5">
-        <label class="form-label">Select Course</label>
-        <select name="courseId" class="form-select" required>
-            <option value="">Select Course</option>
-            @if (courses != null)
-            {
-                @foreach (var c in courses)
-                {
-                    <option value="@c.Id">@c.Name</option>
-                }
-            }
-        </select>
-    </div>
-    <div class="col-md-2">
-        <button type="submit" class="btn btn-success w-100"><i class="bi bi-link-45deg"></i> Assign Course</button>
-    </div>
-</form>
-<div class="table-responsive">
-    <table class="table table-striped table-hover align-middle shadow-sm">
-        <thead class="table-primary">
-            <tr>
-                <th><i class="bi bi-person"></i> Student</th>
-                <th><i class="bi bi-journal"></i> Course</th>
-                <th><i class="bi bi-gear"></i> Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var sc in Model)
-            {
+    <div class="col-md-8">
+        <h4>Danh Sách Đã Gán</h4>
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@sc.Student?.FullName (@sc.Student?.User?.Username)</td>
-                    <td>@sc.Course?.Name</td>
-                    <td>
-                        <a asp-controller="StudentCourse" 
-                           asp-action="Delete" 
-                           asp-route-studentId="@sc.StudentId" 
-                           asp-route-courseId="@sc.CourseId" 
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Are you sure you want to remove this assignment?');">
-                            <i class="bi bi-trash"></i> Delete
-                        </a>
-                    </td>
+                    <th>Sinh Viên</th>
+                    <th>Khóa Học</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Student.FullName</td>
+                            <td>@item.Course.Name</td>
+                            <td class="text-end">
+                                <a asp-action="Edit" asp-route-studentId="@item.StudentId" asp-route-courseId="@item.CourseId"
+                                    class="btn btn-sm btn-warning">Sửa</a>
+                                <text> | </text>
+
+                                @* === THÊM CLASS "d-inline-block" VÀO ĐÂY === *@
+                                <form asp-action="Delete" method="post" class="d-inline-block"
+                                    onsubmit="return confirm('Bạn có chắc muốn xóa bản ghi này?');">
+                                    <input type="hidden" name="studentId" value="@item.StudentId" />
+                                    <input type="hidden" name="courseId" value="@item.CourseId" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center">Chưa có sinh viên nào được gán vào khóa học.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

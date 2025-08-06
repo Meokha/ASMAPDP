@@ -1,55 +1,101 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
+<html lang="vi">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SIMS</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SIMS.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Index">
-                    <i class="bi bi-mortarboard-fill"></i> SIMS
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SIMS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="mainNavbar">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-house-door-fill"></i> Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Trang
+                                Chủ</a>
                         </li>
-                        @if (Context.Session.GetString("Role") == "Admin")
+
+                        @if (User?.Identity?.IsAuthenticated ?? false)
                         {
-                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Student" asp-action="Index"><i class="bi bi-people-fill"></i> Student Management</a></li>
-                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Course" asp-action="Index"><i class="bi bi-journal-bookmark-fill"></i> Course Management</a></li>
-                            <li class="nav-item"><a class="nav-link text-white" asp-controller="StudentCourse" asp-action="Index"><i class="bi bi-link-45deg"></i> Assign Course</a></li>
-                        }
-                        else if (Context.Session.GetString("Role") == "Student")
-                        {
-                            <li class="nav-item"><a class="nav-link text-white" asp-controller="StudentCourse" asp-action="MyCourses"><i class="bi bi-journal-check"></i> My Courses</a></li>
+                            <!-- Menu Chung -->
+                            @if (User.IsInRole("Teacher") || User.IsInRole("Student"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Teacher" asp-action="Index">Các Khóa Học</a>
+                                </li>
+                            }
+
+                            <!-- Menu chỉ dành cho Student -->
+                            @if (User.IsInRole("Student"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="StudentCourse" asp-action="MyCourses">Khóa Học
+                                        Của Tôi</a>
+                                </li>
+                            }
+
+                            <!-- Menu chỉ dành cho Admin -->
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Student" asp-action="Index">Quản Lý Sinh
+                                        Viên</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="TeacherManagement" asp-action="Index">Quản Lý
+                                        Giáo Viên</a>
+                                </li>
+                            }
+
+                            <!-- Menu chỉ dành cho Teacher -->
+                            @if (User.IsInRole("Teacher"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Student" asp-action="Index">Quản Lý Sinh
+                                        Viên</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="StudentCourse" asp-action="Index">Xếp Lớp</a>
+                                </li>
+                            }
                         }
                     </ul>
-                    <ul class="navbar-nav ms-auto">
-                        @if (Context.Session.GetString("UserId") == null)
+
+                    <ul class="navbar-nav">
+                        @* === BẮT ĐẦU PHẦN SỬA LỖI CS8602 === *@
+                        @if (User?.Identity != null && User?.Identity?.IsAuthenticated == true)
                         {
-                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Account" asp-action="Login"><i class="bi bi-box-arrow-in-right"></i> Login</a></li>
-                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Account" asp-action="Register"><i class="bi bi-person-plus-fill"></i> Register</a></li>
+                            <li class="nav-item">
+                                <span class="nav-link text-dark">Chào, @User.Identity.Name!
+                                    (@(User?.FindFirstValue(ClaimTypes.Role) ?? "guest"))</span>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Logout" method="post">
+                                    <button type="submit" class="nav-link btn btn-link text-dark">Đăng Xuất</button>
+                                </form>
+                            </li>
                         }
+                        @* === KẾT THÚC PHẦN SỬA LỖI CS8602 === *@
                         else
                         {
-                            var db = Context.RequestServices.GetService(typeof(SIMS.Models.SIMSDbContext)) as SIMS.Models.SIMSDbContext;
-                            var userId = Context.Session.GetInt32("UserId");
-                            var username = db?.Users.FirstOrDefault(u => u.Id == userId)?.Username;
-                            <li class="nav-item d-flex align-items-center me-2">
-                                <span class="text-white fw-bold"><i class="bi bi-person-circle"></i> Welcome, @username!</span>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Đăng Ký</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link text-white" asp-controller="Account" asp-action="Logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Đăng Nhập</a>
+                            </li>
                         }
                     </ul>
                 </div>
@@ -61,15 +107,16 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="border-top footer text-light bg-primary mt-5">
-        <div class="container text-center py-2">
-            &copy; 2025 - SIMS <i class="bi bi-mortarboard-fill"></i> | <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-light">Privacy</a>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2025 - SIMS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>
