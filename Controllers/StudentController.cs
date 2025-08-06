@@ -3,11 +3,11 @@ using SIMS.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks; // Thêm using này
+using System.Threading.Tasks;
 
 namespace SIMS.Controllers
 {
-    // Quyền truy cập vẫn là Admin và Teacher
+    // allow both Admin and Teacher roles to access this controller
     [Authorize(Roles = "Admin,Teacher")]
     public class StudentController : Controller
     {
@@ -16,25 +16,22 @@ namespace SIMS.Controllers
         {
             _context = context;
         }
-
         public async Task<IActionResult> Index()
         {
             var students = await _context.Students.Include(s => s.User).ToListAsync();
             return View(students);
         }
-
         public IActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string studentCode, string fullName, string email, string username, string password)
         {
             if (await _context.Users.AnyAsync(u => u.Username == username))
             {
-                ModelState.AddModelError("Username", "Tên đăng nhập đã tồn tại.");
+                ModelState.AddModelError("Username", "Username already exists.");
             }
             if (ModelState.ErrorCount == 0)
             {
@@ -65,8 +62,6 @@ namespace SIMS.Controllers
             ViewData["username"] = username;
             return View();
         }
-
-        // ... Các action Edit giữ nguyên ...
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -74,7 +69,6 @@ namespace SIMS.Controllers
             if (student == null) return NotFound();
             return View(student);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, string studentCode, string fullName, string email, string username)
@@ -84,7 +78,7 @@ namespace SIMS.Controllers
 
              if (await _context.Users.AnyAsync(u => u.Username == username && u.Id != studentToUpdate.UserId))
              {
-                 ModelState.AddModelError("Username", "Tên đăng nhập đã được sử dụng.");
+                 ModelState.AddModelError("Username", "Username already exists.");
              }
              if (ModelState.ErrorCount == 0)
              {
@@ -101,18 +95,12 @@ namespace SIMS.Controllers
              }
              return View(studentToUpdate);
         }
-
-
-        // === BẮT ĐẦU PHẦN SỬA DELETE ===
-
-        // BƯỚC 1: Action GET để hiển thị trang xác nhận
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
             var student = await _context.Students
                 .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -121,12 +109,9 @@ namespace SIMS.Controllers
             {
                 return NotFound();
             }
-
-            // Trả về view xác nhận thay vì xóa ngay lập tức
             return View(student);
         }
-
-        // BƯỚC 2: Action POST để thực hiện xóa sau khi người dùng xác nhận
+        // Action to handle the deletion of a student
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -134,19 +119,15 @@ namespace SIMS.Controllers
             var student = await _context.Students.FindAsync(id);
             if (student != null)
             {
-                // Tìm và xóa cả User liên quan để tránh dữ liệu mồ côi
                 var user = await _context.Users.FindAsync(student.UserId);
                 if (user != null)
                 {
                     _context.Users.Remove(user);
                 }
-                
                 _context.Students.Remove(student);
                 await _context.SaveChangesAsync();
             }
-            
             return RedirectToAction(nameof(Index));
         }
-        // === KẾT THÚC PHẦN SỬA DELETE ===
     }
 }

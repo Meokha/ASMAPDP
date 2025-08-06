@@ -16,34 +16,28 @@ namespace SIMS.Controllers
         {
             _context = context;
         }
-
-        // Action GET để hiển thị trang xếp lớp
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Index()
         {
-            // Lấy dữ liệu cần thiết cho form và danh sách
             ViewBag.Students = await _context.Students.ToListAsync();
             ViewBag.Courses = await _context.Courses.ToListAsync();
 
             var studentCourses = await _context.StudentCourses
                 .Include(sc => sc.Student)
                 .Include(sc => sc.Course)
-                .OrderBy(sc => sc.Student.FullName) // Sắp xếp cho dễ nhìn
+                .OrderBy(sc => sc.Student.FullName)
                 .ToListAsync();
 
             return View(studentCourses);
         }
-
-        // Action POST để thực hiện việc gán
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Assign(int studentId, int courseId)
         {
-            // Kiểm tra đầu vào
             if (studentId > 0 && courseId > 0)
             {
-                // Kiểm tra xem bản ghi đã tồn tại chưa
+                // check if the assignment already exists
                 var existingAssignment = await _context.StudentCourses
                     .FirstOrDefaultAsync(sc => sc.StudentId == studentId && sc.CourseId == courseId);
 
@@ -54,11 +48,9 @@ namespace SIMS.Controllers
                     await _context.SaveChangesAsync();
                 }
             }
-            // Sau khi gán xong, quay lại trang Index để xem kết quả
+            // After assigning, redirect back to the Index page to see the results
             return RedirectToAction(nameof(Index));
         }
-
-        // Action POST để thực hiện việc xóa
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Teacher")]
@@ -75,8 +67,6 @@ namespace SIMS.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-        // Action của sinh viên để tự đăng ký (giữ nguyên)
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Student")]
@@ -102,8 +92,6 @@ namespace SIMS.Controllers
 
             return RedirectToAction("Details", "Teacher", new { id = courseId });
         }
-
-        // Action của sinh viên để xem khóa học của mình (giữ nguyên)
         [Authorize(Roles = "Student")]
         public async Task<IActionResult> MyCourses()
         {
@@ -124,7 +112,6 @@ namespace SIMS.Controllers
         [Authorize(Roles = "Teacher")]
 public async Task<IActionResult> Edit(int studentId, int courseId)
 {
-    // Tìm bản ghi cần sửa
     var assignment = await _context.StudentCourses
         .Include(sc => sc.Student)
         .Include(sc => sc.Course)
@@ -134,42 +121,29 @@ public async Task<IActionResult> Edit(int studentId, int courseId)
     {
         return NotFound();
     }
-
-    // Lấy danh sách để điền vào dropdown
     ViewBag.Students = await _context.Students.ToListAsync();
     ViewBag.Courses = await _context.Courses.ToListAsync();
 
     return View(assignment);
 }
-
-// ==========================================================
-// BƯỚC 2.2: Action POST để nhận dữ liệu và lưu
-// ==========================================================
 [HttpPost]
 [ValidateAntiForgeryToken]
 [Authorize(Roles = "Teacher")]
 public async Task<IActionResult> Edit(int originalStudentId, int originalCourseId, int newStudentId, int newCourseId)
 {
-    // Kiểm tra xem người dùng có chọn đủ không
     if (newStudentId <= 0 || newCourseId <= 0)
     {
         ModelState.AddModelError("", "Vui lòng chọn cả sinh viên và khóa học.");
-        // Nếu có lỗi, phải load lại dữ liệu cho view
          ViewBag.Students = await _context.Students.ToListAsync();
          ViewBag.Courses = await _context.Courses.ToListAsync();
-         // Lấy lại bản ghi gốc để hiển thị
          var originalAssignment = await _context.StudentCourses.FindAsync(originalStudentId, originalCourseId);
          return View(originalAssignment);
     }
-    
-    // Tìm bản ghi gốc cần cập nhật
     var assignmentToUpdate = await _context.StudentCourses.FindAsync(originalStudentId, originalCourseId);
     if (assignmentToUpdate == null)
     {
         return NotFound();
     }
-
-    // Kiểm tra xem bản ghi mới đã tồn tại chưa (trừ chính nó)
     bool isNewAssignmentExist = await _context.StudentCourses
         .AnyAsync(sc => sc.StudentId == newStudentId && sc.CourseId == newCourseId);
 
@@ -180,22 +154,16 @@ public async Task<IActionResult> Edit(int originalStudentId, int originalCourseI
 
     if (ModelState.ErrorCount == 0)
     {
-        // Nếu có sự thay đổi
         if (originalStudentId != newStudentId || originalCourseId != newCourseId)
         {
-            // Xóa bản ghi cũ
             _context.StudentCourses.Remove(assignmentToUpdate);
 
-            // Tạo bản ghi mới
             var newAssignment = new StudentCourse { StudentId = newStudentId, CourseId = newCourseId };
             _context.StudentCourses.Add(newAssignment);
-
             await _context.SaveChangesAsync();
         }
         return RedirectToAction(nameof(Index));
     }
-    
-    // Nếu có lỗi, quay lại view Edit
     ViewBag.Students = await _context.Students.ToListAsync();
     ViewBag.Courses = await _context.Courses.ToListAsync();
     return View(assignmentToUpdate);

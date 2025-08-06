@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SIMS.Controllers
 {
-    [Authorize] // Yêu cầu đăng nhập
+    [Authorize] // login required for all users
     public class CourseController : Controller
     {
         private readonly SIMSDbContext _context;
@@ -14,7 +14,7 @@ namespace SIMS.Controllers
             _context = context;
         }
 
-        // Mọi người dùng đã đăng nhập đều có thể xem
+        // All logged-in users can view courses
         public IActionResult Index()
         {
             var courses = _context.Courses.ToList();
@@ -28,7 +28,7 @@ namespace SIMS.Controllers
             return View(course);
         }
 
-        // === THAY ĐỔI QUAN TRỌNG: Chỉ Teacher được quản lý ===
+        // === IMPORTANT CHANGE: Only Teachers can manage ===
         [Authorize(Roles = "Teacher")]
         public IActionResult Create() => View();
 

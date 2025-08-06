@@ -7,8 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SIMS.Controllers
 {
-    // Controller này bây giờ quản lý cả Dashboard và Khóa học
-    [Authorize] // Yêu cầu đăng nhập
+    [Authorize] 
     public class TeacherController : Controller
     {
         private readonly SIMSDbContext _context;
@@ -17,17 +16,11 @@ namespace SIMS.Controllers
         {
             _context = context;
         }
-
-        // === ĐÂY LÀ CODE TỪ COURSECONTROLLER ĐÃ ĐƯỢC CHUYỂN SANG ===
-
-        // Trang Index của Teacher giờ là danh sách khóa học
-        // Mọi người dùng đã đăng nhập đều có thể xem
         public async Task<IActionResult> Index()
         {
             var courses = await _context.Courses.ToListAsync();
             return View(courses);
         }
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -35,10 +28,8 @@ namespace SIMS.Controllers
             if (course == null) return NotFound();
             return View(course);
         }
-
         [Authorize(Roles = "Teacher")]
         public IActionResult Create() => View();
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Teacher")]

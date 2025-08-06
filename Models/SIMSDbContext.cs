@@ -19,16 +19,12 @@ namespace SIMS.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // --- DỮ LIỆU MẪU MỚI VỚI 3 VAI TRÒ ---
-
-            // 1. Tạo các User với các Role đã được phân lại
             var superAdminUser = new User 
             { 
                 Id = 1, 
                 Username = "admin", 
                 Email = "admin@sims.local", 
-                Role = "Admin", // Admin mới, quyền lực nhất
+                Role = "Admin", 
                 PasswordHash = global::BCrypt.Net.BCrypt.HashPassword("admin123") 
             };
             
@@ -37,7 +33,7 @@ namespace SIMS.Models
                 Id = 2, 
                 Username = "teacher", 
                 Email = "teacher1@sims.local", 
-                Role = "Teacher", // Vai trò giáo viên
+                Role = "Teacher", 
                 PasswordHash = global::BCrypt.Net.BCrypt.HashPassword("teacher123") 
             };
             
@@ -46,14 +42,11 @@ namespace SIMS.Models
                 Id = 3, 
                 Username = "student", 
                 Email = "student1@sims.local", 
-                Role = "Student", // Vai trò sinh viên
+                Role = "Student",
                 PasswordHash = global::BCrypt.Net.BCrypt.HashPassword("student123")
             };
 
             modelBuilder.Entity<User>().HasData(superAdminUser, teacherUser, studentUser);
-
-            // 2. Tạo thông tin Teacher tương ứng với teacherUser
-            // Lưu ý: Không có bản ghi Teacher/Student nào cho superAdminUser vì họ chỉ là quản trị viên hệ thống.
             modelBuilder.Entity<Teacher>().HasData(
                 new Teacher { 
                     Id = 1, 
@@ -63,8 +56,6 @@ namespace SIMS.Models
                     UserId = teacherUser.Id 
                 }
             );
-
-            // 3. Tạo thông tin Student tương ứng với studentUser
             modelBuilder.Entity<Student>().HasData(
                 new Student { 
                     Id = 1, 
@@ -74,16 +65,14 @@ namespace SIMS.Models
                     UserId = studentUser.Id 
                 }
             );
-
-            // Thiết lập mối quan hệ một-nhiều giữa User và Student/Teacher (tùy chọn nhưng khuyến khích)
             modelBuilder.Entity<Student>()
                 .HasOne(s => s.User)
-                .WithOne() // Nếu một User chỉ có thể là một Student
+                .WithOne() 
                 .HasForeignKey<Student>(s => s.UserId);
 
             modelBuilder.Entity<Teacher>()
                 .HasOne(t => t.User)
-                .WithOne() // Nếu một User chỉ có thể là một Teacher
+                .WithOne()
                 .HasForeignKey<Teacher>(t => t.UserId);
         }
     }

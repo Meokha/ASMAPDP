@@ -29,7 +29,7 @@ namespace SIMS.Controllers
 
             if (user == null || !global::BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
             {
-                ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
+                ModelState.AddModelError("", "Name or password is incorrect.");
                 return View();
             }
 
@@ -43,7 +43,7 @@ namespace SIMS.Controllers
             var claimsIdentity = new ClaimsIdentity(claims, "MyCookieAuth");
             await HttpContext.SignInAsync("MyCookieAuth", new ClaimsPrincipal(claimsIdentity));
 
-            // Chuyển hướng dựa trên vai trò
+            // Redirect based on role
             switch (user.Role)
             {
                 case "Admin":
@@ -69,7 +69,7 @@ namespace SIMS.Controllers
         {
             if (await _context.Users.AnyAsync(u => u.Username == username))
             {
-                ModelState.AddModelError("", "Tên người dùng đã tồn tại");
+                ModelState.AddModelError("", "Username already exists.");
                 return View();
             }
 
@@ -92,8 +92,8 @@ namespace SIMS.Controllers
             };
             _context.Students.Add(student);
             await _context.SaveChangesAsync();
-            
-            TempData["RegisterSuccess"] = "Đăng ký thành công! Bạn có thể đăng nhập ngay.";
+
+            TempData["RegisterSuccess"] = "Registration successful! You can log in now.";
             return RedirectToAction("Login");
         }
     }
