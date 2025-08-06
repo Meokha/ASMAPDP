@@ -12,8 +12,6 @@ namespace SIMS.Controllers
         {
             _context = context;
         }
-
-        // Gán khóa học cho sinh viên
         public IActionResult Index()
         {
             var students = _context.Students.Include(s => s.User).ToList();
@@ -27,7 +25,6 @@ namespace SIMS.Controllers
             ViewBag.Courses = courses;
             return View(studentCourses);
         }
-
         [HttpPost]
         public IActionResult Assign(int studentId, int courseId)
         {
@@ -48,12 +45,10 @@ namespace SIMS.Controllers
             {
                 return NotFound();
             }
-
             _context.StudentCourses.Remove(sc);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-
         public IActionResult MyCourses()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -61,13 +56,11 @@ namespace SIMS.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-
             var student = _context.Students.FirstOrDefault(s => s.UserId == userId);
             if (student == null)
             {
                 return NotFound();
             }
-
             var courses = _context.StudentCourses
                 .Where(sc => sc.StudentId == student.Id)
                 .Include(sc => sc.Course)

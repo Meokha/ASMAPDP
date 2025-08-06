@@ -12,15 +12,11 @@ namespace SIMS.Controllers
         {
             _context = context;
         }
-
-        // Danh sách sinh viên
         public IActionResult Index()
         {
             var students = _context.Students.Include(s => s.User).ToList();
             return View(students);
         }
-
-        // Thêm sinh viên
         public IActionResult Create()
         {
             return View();
@@ -33,7 +29,6 @@ namespace SIMS.Controllers
                 ModelState.AddModelError("", "Username already exists");
                 return View();
             }
-            // Mã hóa mật khẩu
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
             var user = new User
             {
@@ -55,8 +50,6 @@ namespace SIMS.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        // Sửa sinh viên
         public IActionResult Edit(int id)
         {
             var student = _context.Students.Include(s => s.User).FirstOrDefault(s => s.Id == id);
@@ -79,13 +72,10 @@ namespace SIMS.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        // Xóa sinh viên
         public IActionResult Delete(int id)
         {
             var student = _context.Students.Include(s => s.User).FirstOrDefault(s => s.Id == id);
             if (student == null) return NotFound();
-            // Xóa cả user liên quan
             if (student.User != null)
             {
                 _context.Users.Remove(student.User);

@@ -11,15 +11,11 @@ namespace SIMS.Controllers
         {
             _context = context;
         }
-
-        // Danh sách khóa học
         public IActionResult Index()
         {
             var courses = _context.Courses.ToList();
             return View(courses);
         }
-
-        // Thêm khóa học
         public IActionResult Create()
         {
             return View();
@@ -36,8 +32,6 @@ namespace SIMS.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        // Sửa khóa học
         public IActionResult Edit(int id)
         {
             var course = _context.Courses.Find(id);
@@ -54,8 +48,6 @@ namespace SIMS.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        // Xóa khóa học
         public IActionResult Delete(int id)
         {
             var course = _context.Courses.Find(id);

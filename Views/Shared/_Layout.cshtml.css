@@ -1,16 +1,12 @@
-﻿/* Giao diện glassmorphism nâng cấp, màu sắc tươi sáng hiện đại */
-
-body {
+﻿body {
     min-height: 100vh;
     background: linear-gradient(120deg, #fceabb 0%, #f8b500 50%, #f76d6d 100%);
     background-attachment: fixed;
     font-family: 'Poppins', Arial, sans-serif;
     color: #222;
 }
-
 .navbar, .main-navbar {
     background: linear-gradient(90deg, #ffb347 0%, #ff5e62 100%);
-    /* cam sang hồng */
     backdrop-filter: blur(16px);
     border-radius: 0 0 22px 22px;
     box-shadow: 0 8px 32px 0 rgba(255,94,98,0.10);
@@ -21,7 +17,6 @@ body {
     justify-content: space-between;
     border: 1.5px solid rgba(255,255,255,0.18);
 }
-
 a.navbar-brand, .main-navbar .brand {
     font-weight: 700;
     font-size: 2rem;
@@ -31,7 +26,6 @@ a.navbar-brand, .main-navbar .brand {
     text-decoration: none;
     transition: color 0.2s;
 }
-
 a, .main-navbar .nav-link {
     color: #fff;
     font-weight: 500;
@@ -42,19 +36,16 @@ a, .main-navbar .nav-link {
     padding: 7px 18px;
     transition: background 0.2s, color 0.2s;
 }
-
 a:hover, .main-navbar .nav-link:hover {
     background: rgba(255,255,255,0.18);
     color: #222;
     text-decoration: none;
 }
-
 .navbar-toggler {
     border: none;
     background: rgba(255,255,255,0.3);
     border-radius: 12px;
 }
-
 .btn-primary, .btn-submit {
     color: #fff !important;
     background: linear-gradient(90deg, #ff5e62 0%, #ff9966 100%);
@@ -68,14 +59,12 @@ a:hover, .main-navbar .nav-link:hover {
     transition: all 0.4s;
     letter-spacing: 0.5px;
 }
-
 .btn-primary:hover, .btn-submit:hover {
     background-position: right center;
     transform: translateY(-3px) scale(1.04);
     box-shadow: 0 10px 24px rgba(255,94,98,0.18);
     color: #fff !important;
 }
-
 .footer {
     text-align: center;
     color: #fff;
@@ -94,11 +83,9 @@ a:hover, .main-navbar .nav-link:hover {
     border-radius: 18px 18px 0 0;
     box-shadow: 0 -4px 24px 0 rgba(161,140,209,0.10);
 }
-
 .main-content {
     padding-bottom: 60px; /* Đảm bảo không bị footer che */
 }
-
 .container, .main-content {
     max-width: 980px;
     margin: 0 auto;
@@ -108,18 +95,15 @@ a:hover, .main-navbar .nav-link:hover {
     box-shadow: 0 8px 32px 0 rgba(255,94,98,0.07);
     backdrop-filter: blur(10px);
 }
-
 .border-top {
     border-top: 1px solid #e5e5e5;
 }
 .border-bottom {
     border-bottom: 1px solid #e5e5e5;
 }
-
 .box-shadow {
     box-shadow: 0 .25rem .75rem rgba(255,94,98, .05);
 }
-
 button.accept-policy {
     font-size: 1rem;
     line-height: inherit;
@@ -130,12 +114,10 @@ button.accept-policy {
     border: none;
     font-weight: 500;
 }
-
 button.accept-policy:hover {
     background-position: right center;
     opacity: 0.92;
 }
-/* Thêm vào site.css hoặc _Layout.cshtml.css */
 .btn-back {
     background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
     color: #fff !important;
@@ -145,7 +127,6 @@ button.accept-policy:hover {
     padding: 8px 28px;
     box-shadow: 0 2px 8px rgba(161,140,209,0.10);
 }
-
 .btn-back:hover {
     background: linear-gradient(90deg, #fbc2eb 0%, #a18cd1 100%);
     color: #222 !important;
