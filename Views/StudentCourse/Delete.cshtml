@@ -1,0 +1,43 @@
+@model SIMS.Models.StudentCourse
+
+@{
+    ViewData["Title"] = "Delete Assignment";
+}
+
+<h1 class="text-primary">@ViewData["Title"]</h1>
+
+<h3 class="text-danger">Are you sure you want to delete this assignment?</h3>
+<div>
+    <h4 class="text-secondary">Assignment Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-3">
+            Student Name
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Student.FullName)
+        </dd>
+        <dt class = "col-sm-3">
+            Course Name
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Course.Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        @* 
+          Rất quan trọng: Các thẻ input ẩn này dùng để gửi khóa phức hợp (StudentId, CourseId)
+          đến phương thức DeleteConfirmed khi form được submit.
+        *@
+        <input type="hidden" asp-for="StudentId" />
+        <input type="hidden" asp-for="CourseId" />
+
+        <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Delete
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Back to List
+        </a>
+    </form>
+</div>

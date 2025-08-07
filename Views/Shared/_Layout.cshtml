@@ -28,23 +28,18 @@
 
                         @if (User?.Identity?.IsAuthenticated ?? false)
                         {
-                            <!-- Menu Chung -->
                             @if (User.IsInRole("Teacher") || User.IsInRole("Student"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="Teacher" asp-action="Index">Courses</a>
                                 </li>
                             }
-
-                            <!-- Menu chỉ dành cho Student -->
                             @if (User.IsInRole("Student"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-controller="StudentCourse" asp-action="MyCourses">My Courses</a>
                                 </li>
                             }
-
-                            <!-- Menu chỉ dành cho Admin -->
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
@@ -54,8 +49,6 @@
                                     <a class="nav-link text-dark" asp-controller="TeacherManagement" asp-action="Index">Manage Teachers</a>
                                 </li>
                             }
-
-                            <!-- Menu chỉ dành cho Teacher -->
                             @if (User.IsInRole("Teacher"))
                             {
                                 <li class="nav-item">
@@ -69,11 +62,10 @@
                     </ul>
 
                     <ul class="navbar-nav">
-                        @* === BẮT ĐẦU PHẦN SỬA LỖI CS8602 === *@
                         @if (User?.Identity != null && User?.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
-                                <span class="nav-link text-dark">Chào, @User.Identity.Name!
+                                <span class="nav-link text-dark">Hello, @User.Identity.Name!
                                     (@(User?.FindFirstValue(ClaimTypes.Role) ?? "guest"))</span>
                             </li>
                             <li class="nav-item">
@@ -82,7 +74,6 @@
                                 </form>
                             </li>
                         }
-                        @* === KẾT THÚC PHẦN SỬA LỖI CS8602 === *@
                         else
                         {
                             <li class="nav-item">

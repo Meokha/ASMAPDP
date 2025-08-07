@@ -1,0 +1,43 @@
+@model SIMS.Models.Teacher // <-- Đảm bảo bạn sử dụng đúng namespace và tên model Teacher
+
+@{
+    ViewData["Title"] = "Delete Teacher";
+}
+
+<h1 class="text-primary">@ViewData["Title"]</h1>
+
+<h3 class="text-danger">Are you sure you want to delete this teacher?</h3>
+<p class="text-danger">This action may also affect related data and cannot be undone.</p>
+
+<div>
+    <h4 class="text-secondary">Teacher Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-3">
+            Full Name
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+        
+        <dt class = "col-sm-3">
+            Email
+        </dt>
+        <dd class = "col-sm-9">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        @* Thêm các thuộc tính khác của Teacher mà bạn muốn hiển thị ở đây *@
+
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Delete
+        </button>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Back to List
+        </a>
+    </form>
+</div>

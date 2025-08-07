@@ -16,6 +16,7 @@ namespace SIMS.Controllers
         {
             _context = context;
         }
+
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Index()
         {
@@ -30,6 +31,7 @@ namespace SIMS.Controllers
 
             return View(studentCourses);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Teacher")]
@@ -37,7 +39,6 @@ namespace SIMS.Controllers
         {
             if (studentId > 0 && courseId > 0)
             {
-                // check if the assignment already exists
                 var existingAssignment = await _context.StudentCourses
                     .FirstOrDefaultAsync(sc => sc.StudentId == studentId && sc.CourseId == courseId);
 
@@ -48,25 +49,9 @@ namespace SIMS.Controllers
                     await _context.SaveChangesAsync();
                 }
             }
-            // After assigning, redirect back to the Index page to see the results
             return RedirectToAction(nameof(Index));
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Teacher")]
-        public async Task<IActionResult> Delete(int studentId, int courseId)
-        {
-            var assignmentToDelete = await _context.StudentCourses
-                .FirstOrDefaultAsync(sc => sc.StudentId == studentId && sc.CourseId == courseId);
 
-            if (assignmentToDelete != null)
-            {
-                _context.StudentCourses.Remove(assignmentToDelete);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Student")]
@@ -92,6 +77,7 @@ namespace SIMS.Controllers
 
             return RedirectToAction("Details", "Teacher", new { id = courseId });
         }
+
         [Authorize(Roles = "Student")]
         public async Task<IActionResult> MyCourses()
         {
@@ -109,64 +95,110 @@ namespace SIMS.Controllers
 
             return View(courses);
         }
+
         [Authorize(Roles = "Teacher")]
-public async Task<IActionResult> Edit(int studentId, int courseId)
-{
-    var assignment = await _context.StudentCourses
-        .Include(sc => sc.Student)
-        .Include(sc => sc.Course)
-        .FirstOrDefaultAsync(sc => sc.StudentId == studentId && sc.CourseId == courseId);
-
-    if (assignment == null)
-    {
-        return NotFound();
-    }
-    ViewBag.Students = await _context.Students.ToListAsync();
-    ViewBag.Courses = await _context.Courses.ToListAsync();
-
-    return View(assignment);
-}
-[HttpPost]
-[ValidateAntiForgeryToken]
-[Authorize(Roles = "Teacher")]
-public async Task<IActionResult> Edit(int originalStudentId, int originalCourseId, int newStudentId, int newCourseId)
-{
-    if (newStudentId <= 0 || newCourseId <= 0)
-    {
-        ModelState.AddModelError("", "Please select both student and course.");
-         ViewBag.Students = await _context.Students.ToListAsync();
-         ViewBag.Courses = await _context.Courses.ToListAsync();
-         var originalAssignment = await _context.StudentCourses.FindAsync(originalStudentId, originalCourseId);
-         return View(originalAssignment);
-    }
-    var assignmentToUpdate = await _context.StudentCourses.FindAsync(originalStudentId, originalCourseId);
-    if (assignmentToUpdate == null)
-    {
-        return NotFound();
-    }
-    bool isNewAssignmentExist = await _context.StudentCourses
-        .AnyAsync(sc => sc.StudentId == newStudentId && sc.CourseId == newCourseId);
-
-    if (isNewAssignmentExist && (originalStudentId != newStudentId || originalCourseId != newCourseId))
-    {
-         ModelState.AddModelError("", "This assignment already exists.");
-    }
-
-    if (ModelState.ErrorCount == 0)
-    {
-        if (originalStudentId != newStudentId || originalCourseId != newCourseId)
+        public async Task<IActionResult> Edit(int studentId, int courseId)
         {
-            _context.StudentCourses.Remove(assignmentToUpdate);
+            var assignment = await _context.StudentCourses
+                .Include(sc => sc.Student)
+                .Include(sc => sc.Course)
+                .FirstOrDefaultAsync(sc => sc.StudentId == studentId && sc.CourseId == courseId);
 
-            var newAssignment = new StudentCourse { StudentId = newStudentId, CourseId = newCourseId };
-            _context.StudentCourses.Add(newAssignment);
-            await _context.SaveChangesAsync();
+            if (assignment == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Students = await _context.Students.ToListAsync();
+            ViewBag.Courses = await _context.Courses.ToListAsync();
+
+            return View(assignment);
         }
-        return RedirectToAction(nameof(Index));
-    }
-    ViewBag.Students = await _context.Students.ToListAsync();
-    ViewBag.Courses = await _context.Courses.ToListAsync();
-    return View(assignmentToUpdate);
-}
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
+        public async Task<IActionResult> Edit(int originalStudentId, int originalCourseId, int newStudentId, int newCourseId)
+        {
+            if (newStudentId <= 0 || newCourseId <= 0)
+            {
+                ModelState.AddModelError("", "Please select both student and course.");
+                ViewBag.Students = await _context.Students.ToListAsync();
+                ViewBag.Courses = await _context.Courses.ToListAsync();
+                var originalAssignment = await _context.StudentCourses.FindAsync(originalStudentId, originalCourseId);
+                return View(originalAssignment);
+            }
+            var assignmentToUpdate = await _context.StudentCourses.FindAsync(originalStudentId, originalCourseId);
+            if (assignmentToUpdate == null)
+            {
+                return NotFound();
+            }
+            bool isNewAssignmentExist = await _context.StudentCourses
+                .AnyAsync(sc => sc.StudentId == newStudentId && sc.CourseId == newCourseId);
+
+            if (isNewAssignmentExist && (originalStudentId != newStudentId || originalCourseId != newCourseId))
+            {
+                ModelState.AddModelError("", "This assignment already exists.");
+            }
+
+            if (ModelState.ErrorCount == 0)
+            {
+                if (originalStudentId != newStudentId || originalCourseId != newCourseId)
+                {
+                    _context.StudentCourses.Remove(assignmentToUpdate);
+
+                    var newAssignment = new StudentCourse { StudentId = newStudentId, CourseId = newCourseId };
+                    _context.StudentCourses.Add(newAssignment);
+                    await _context.SaveChangesAsync();
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.Students = await _context.Students.ToListAsync();
+            ViewBag.Courses = await _context.Courses.ToListAsync();
+            return View(assignmentToUpdate);
+        }
+
+        // ---------- PHƯƠNG THỨC DELETE ĐÚNG ĐƯỢC GIỮ LẠI VÀ BỔ SUNG AUTHORIZE ----------
+        [Authorize(Roles = "Teacher")]
+        public async Task<IActionResult> Delete(int? studentId, int? courseId)
+        {
+            if (studentId == null || courseId == null)
+            {
+                return NotFound();
+            }
+
+            // Dùng FirstOrDefaultAsync và Include để lấy thông tin chi tiết (tên sinh viên, tên khóa học)
+            // để hiển thị trên trang xác nhận.
+            var studentCourse = await _context.StudentCourses
+                .Include(sc => sc.Student)
+                .Include(sc => sc.Course)
+                .FirstOrDefaultAsync(m => m.StudentId == studentId && m.CourseId == courseId);
+
+            if (studentCourse == null)
+            {
+                return NotFound();
+            }
+
+            // Trả về View xác nhận với dữ liệu của bản ghi cần xóa
+            return View(studentCourse);
+        }
+
+        // POST: StudentCourse/Delete
+        // Phương thức này được gọi khi người dùng nhấn nút "Delete" trên trang xác nhận.
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
+        public async Task<IActionResult> DeleteConfirmed(int studentId, int courseId)
+        {
+            // Dùng FindAsync để tìm nhanh bản ghi cần xóa
+            var studentCourse = await _context.StudentCourses.FindAsync(studentId, courseId);
+            if (studentCourse != null)
+            {
+                _context.StudentCourses.Remove(studentCourse);
+                await _context.SaveChangesAsync();
+            }
+
+            // Quay trở lại trang danh sách
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

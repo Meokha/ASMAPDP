@@ -1,7 +1,7 @@
 @model SIMS.Models.Student
 
 @{
-    ViewData["Title"] = "Thêm Sinh Viên Mới";
+    ViewData["Title"] = "Create Student";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,13 +10,11 @@
 <div class="row">
     <div class="col-md-6">
         <form asp-action="Create" method="post">
-            @* Dòng này sẽ hiển thị các lỗi validation chung, ví dụ "Username đã tồn tại" *@
             <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-            <h4>Thông tin cá nhân</h4>
+            <h4>Personal Information</h4>
             <div class="form-group mb-2">
                 <label class="control-label">Student Code</label>
-                @* asp-for sẽ tự liên kết với thuộc tính StudentCode trong Model *@
                 <input asp-for="StudentCode" class="form-control" />
                 <span asp-validation-for="StudentCode" class="text-danger"></span>
             </div>
@@ -44,21 +42,16 @@
             </div>
 
             <!-- ==================================================== -->
-            <!-- == VUI LÒNG KIỂM TRA KỸ PHẦN NÀY TRONG CODE CỦA BẠN == -->
+            <!-- == PLEASE CHECK THIS PART IN YOUR CODE == -->
             <!-- ==================================================== -->
             <div class="form-group mt-4">
                 <input type="submit" value="Create" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-secondary">Back</a>
             </div>
-            <!-- ==================================================== -->
-            <!--         KẾT THÚC PHẦN CHỨA CÁC NÚT BẤM             -->
-            <!-- ==================================================== -->
-
         </form>
     </div>
 </div>
-
-@* Section này bắt buộc phải có để các thông báo lỗi validation hoạt động *@
+@* This section is required for validation error messages to work *@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

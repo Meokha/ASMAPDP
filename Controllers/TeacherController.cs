@@ -82,7 +82,7 @@ namespace SIMS.Controllers
             if (id == null) return NotFound();
             var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == id);
             if (course == null) return NotFound();
-            return View(course);
+            return View("~/Views/Course/Delete.cshtml", course);
         }
 
         [HttpPost, ActionName("Delete")]
