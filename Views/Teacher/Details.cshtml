@@ -1,17 +1,17 @@
 @model SIMS.Models.Course
 
 @{
-    ViewData["Title"] = "Chi Tiết Khóa Học";
+    ViewData["Title"] = "Course Details";
 }
 
 <h1>@Model.Name</h1>
 
 <div>
-    <h4>Thông tin khóa học</h4>
+    <h4>Course Information</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            Mô tả
+            Description
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
@@ -19,7 +19,7 @@
     </dl>
 </div>
 
-@* Hiển thị thông báo thành công hoặc lỗi sau khi đăng ký *@
+@* Display success or error messages after registration *@
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success">@TempData["SuccessMessage"]</div>
@@ -28,23 +28,18 @@
 {
     <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
 }
-
-
 @* ========================================================== *@
-@*           HIỂN THỊ NÚT ĐĂNG KÝ CHO SINH VIÊN               *@
+@*           DISPLAY ENROLL BUTTON FOR STUDENTS               *@
 @* ========================================================== *@
 @if (User.IsInRole("Student"))
 {
     <div class="mt-4">
         <form asp-controller="StudentCourse" asp-action="Enroll" method="post">
             <input type="hidden" name="courseId" value="@Model.Id" />
-            <button type="submit" class="btn btn-lg btn-success">Đăng Ký Khóa Học Này</button>
+            <button type="submit" class="btn btn-lg btn-success">Enroll in This Course</button>
         </form>
     </div>
 }
-
-
 <div class="mt-4">
-    @* Link này quay về trang danh sách khóa học trong TeacherController *@
-    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to Course List</a>
 </div>

@@ -32,11 +32,11 @@ public async Task<IActionResult> Create(string fullName, string specialization, 
 {
     if (string.IsNullOrEmpty(email))
     {
-        ModelState.AddModelError("Email", "Vui lòng nhập địa chỉ email.");
+        ModelState.AddModelError("Email", "Please enter email address.");
     }
     if (await _context.Users.AnyAsync(u => u.Username == username))
     {
-        ModelState.AddModelError("Username", "Name ");
+        ModelState.AddModelError("Username", "Username is already taken.");
     }
     if (ModelState.ErrorCount == 0)
     {

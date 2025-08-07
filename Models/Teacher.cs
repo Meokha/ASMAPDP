@@ -5,7 +5,7 @@ namespace SIMS.Models
         public int Id { get; set; }
         public required string FullName { get; set; }
         public required string Email { get; set; }
-        public string? Specialization { get; set; } // Chuyên ngành
+        public string? Specialization { get; set; }
 
         // Foreign Key to User
         public int UserId { get; set; }

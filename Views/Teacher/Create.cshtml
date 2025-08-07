@@ -1,16 +1,16 @@
 @{ ViewData["Title"] = "Teacher Dashboard"; }
 <div class="text-center">
-    <h1 class="display-4">Bảng Điều Khiển Giáo Viên</h1>
+    <h1 class="display-4">Teacher Dashboard</h1>
 </div>
 <hr />
 <div class="row justify-content-center g-3">
     <div class="col-md-4">
-        <a asp-controller="Course" asp-action="Index" class="btn btn-lg btn-primary w-100 p-3">Quản Lý Khóa Học</a>
+        <a asp-controller="Course" asp-action="Index" class="btn btn-lg btn-primary w-100 p-3">Manage Courses</a>
     </div>
     <div class="col-md-4">
-        <a asp-controller="Student" asp-action="Index" class="btn btn-lg btn-warning w-100 p-3">Quản Lý Sinh Viên</a>
+        <a asp-controller="Student" asp-action="Index" class="btn btn-lg btn-warning w-100 p-3">Manage Students</a>
     </div>
     <div class="col-md-4">
-        <a asp-controller="StudentCourse" asp-action="Index" class="btn btn-lg btn-success w-100 p-3">Xếp Lớp Sinh Viên</a>
+        <a asp-controller="StudentCourse" asp-action="Index" class="btn btn-lg btn-success w-100 p-3">Manage Student Courses</a>
     </div>
 </div>

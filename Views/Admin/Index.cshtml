@@ -1,14 +1,14 @@
 @{ ViewData["Title"] = "Admin Dashboard"; }
 <div class="text-center">
-    <h1 class="display-4">Bảng Điều Khiển Super Admin</h1>
-    <p>Chọn một chức năng để bắt đầu quản lý.</p>
+    <h1 class="display-4">Super Admin Control Panel</h1>
+    <p>Select a function to start managing.</p>
 </div>
 <hr />
 <div class="row justify-content-center">
     <div class="col-md-5">
-        <a asp-controller="Student" asp-action="Index" class="btn btn-lg btn-primary w-100 p-4">Quản Lý Sinh Viên</a>
+        <a asp-controller="Student" asp-action="Index" class="btn btn-lg btn-primary w-100 p-4">Manage Students</a>
     </div>
     <div class="col-md-5">
-        <a asp-controller="TeacherManagement" asp-action="Index" class="btn btn-lg btn-info w-100 p-4">Quản Lý Giáo Viên</a>
+        <a asp-controller="TeacherManagement" asp-action="Index" class="btn btn-lg btn-info w-100 p-4">Manage Teachers</a>
     </div>
 </div>

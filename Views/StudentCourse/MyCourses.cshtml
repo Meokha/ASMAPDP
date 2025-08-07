@@ -1,7 +1,7 @@
 @model IEnumerable<SIMS.Models.Course>
 
 @{
-    ViewData["Title"] = "Khóa Học Của Tôi";
+    ViewData["Title"] = "My Courses";
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -9,16 +9,13 @@
 </div>
 
 <div class="table-responsive">
-    @* === BẮT ĐẦU PHẦN SỬA LỖI VÀ CẢI THIỆN === *@
-
-    @* 1. Kiểm tra xem Model có null hoặc rỗng không *@
     @if (Model != null && Model.Any())
     {
         <table class="table table-striped table-hover align-middle shadow-sm">
             <thead class="table-primary">
                 <tr>
-                    <th><i class="bi bi-journal"></i> Tên Khóa Học</th>
-                    <th><i class="bi bi-card-text"></i> Mô Tả</th>
+                    <th><i class="bi bi-journal"></i> Course Name</th>
+                    <th><i class="bi bi-card-text"></i> Description</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,12 +31,9 @@
     }
     else
     {
-        @* 2. Hiển thị thông báo thân thiện nếu không có khóa học *@
         <div class="alert alert-info text-center">
-            <p>Bạn chưa đăng ký khóa học nào.</p>
-            <a asp-controller="Teacher" asp-action="Index" class="btn btn-primary">Xem danh sách và đăng ký ngay!</a>
+            <p>You have not enrolled in any courses.</p>
+            <a asp-controller="Teacher" asp-action="Index" class="btn btn-primary">View courses and enroll now!</a>
         </div>
     }
-    
-    @* === KẾT THÚC PHẦN SỬA LỖI VÀ CẢI THIỆN === *@
 </div>

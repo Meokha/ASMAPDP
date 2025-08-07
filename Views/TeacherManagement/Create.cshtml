@@ -1,7 +1,7 @@
 @model SIMS.Models.Teacher
 
 @{
-    ViewData["Title"] = "Thêm Giáo Viên Mới";
+    ViewData["Title"] = "Add New Teacher";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -10,43 +10,40 @@
     <div class="col-md-6">
         <form asp-action="Create" method="post">
             @Html.AntiForgeryToken()
-
-            @* Dòng này cực kỳ quan trọng, nó sẽ hiển thị tất cả lỗi *@
             <div asp-validation-summary="All" class="text-danger mb-3"></div>
-            
-            <h4>Thông tin cá nhân</h4>
+
+            <h4>Personal Information</h4>
             <div class="form-group mb-2">
-                <label class="control-label">Họ và Tên</label>
+                <label class="control-label">Full Name</label>
                 <input name="fullName" class="form-control" value="@ViewData["FullName"]" />
             </div>
              <div class="form-group mb-3">
-                <label class="control-label">Chuyên ngành</label>
+                <label class="control-label">Specialization</label>
                 <input name="specialization" class="form-control" value="@ViewData["Specialization"]" />
             </div>
 
             <hr/>
-            <h4>Thông tin tài khoản</h4>
+            <h4>Account Information</h4>
              <div class="form-group mb-2">
                 <label class="control-label">Email</label>
                 <input name="email" type="email" class="form-control" value="@ViewData["Email"]" required />
             </div>
              <div class="form-group mb-2">
-                <label class="control-label">Tên Đăng Nhập</label>
+                <label class="control-label">Username</label>
                 <input name="username" class="form-control" value="@ViewData["Username"]" required />
             </div>
             <div class="form-group mb-3">
-                <label class="control-label">Mật Khẩu</label>
+                <label class="control-label">Password</label>
                 <input name="password" type="password" class="form-control" required />
             </div>
 
             <div class="form-group mt-4">
-                <input type="submit" value="Tạo Mới" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

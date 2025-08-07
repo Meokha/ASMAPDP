@@ -15,13 +15,13 @@
 
             <h4>Thông tin cá nhân</h4>
             <div class="form-group mb-2">
-                <label class="control-label">Mã Sinh Viên</label>
+                <label class="control-label">Student Code</label>
                 @* asp-for sẽ tự liên kết với thuộc tính StudentCode trong Model *@
                 <input asp-for="StudentCode" class="form-control" />
                 <span asp-validation-for="StudentCode" class="text-danger"></span>
             </div>
             <div class="form-group mb-2">
-                <label class="control-label">Họ và Tên</label>
+                <label class="control-label">Full Name</label>
                 <input asp-for="FullName" class="form-control" />
                 <span asp-validation-for="FullName" class="text-danger"></span>
             </div>
@@ -32,14 +32,14 @@
             </div>
 
             <hr/>
-            <h4>Thông tin tài khoản</h4>
+            <h4>Account Information</h4>
              <div class="form-group mb-2">
-                <label class="control-label">Tên Đăng Nhập</label>
-                @* Vì User không phải là một phần của Model Student, ta dùng name="" để Controller bắt được *@
+                <label class="control-label">Username</label>
+                @* Because User is not part of the Student Model, we use name="" to capture it in the Controller *@
                 <input name="username" class="form-control" required />
             </div>
             <div class="form-group mb-3">
-                <label class="control-label">Mật Khẩu</label>
+                <label class="control-label">Password</label>
                 <input name="password" type="password" class="form-control" required />
             </div>
 
@@ -47,8 +47,8 @@
             <!-- == VUI LÒNG KIỂM TRA KỸ PHẦN NÀY TRONG CODE CỦA BẠN == -->
             <!-- ==================================================== -->
             <div class="form-group mt-4">
-                <input type="submit" value="Tạo Mới" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Quay Lại</a>
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back</a>
             </div>
             <!-- ==================================================== -->
             <!--         KẾT THÚC PHẦN CHỨA CÁC NÚT BẤM             -->

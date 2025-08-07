@@ -1,19 +1,19 @@
 @model IEnumerable<SIMS.Models.Teacher>
 
 @{
-    ViewData["Title"] = "Quản Lý Giáo Viên";
+    ViewData["Title"] = "Teacher Management";
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    @* Chúng ta sẽ cần tạo action Create cho Teacher sau *@
-    @* <a asp-action="CreateTeacher" class="btn btn-primary">Thêm Giáo Viên Mới</a> *@
+    @* We will need to create an action for creating a Teacher later *@
+    @* <a asp-action="CreateTeacher" class="btn btn-primary">Add New Teacher</a> *@
 </p>
 
 @if (!Model.Any())
 {
-    <p>Chưa có dữ liệu giáo viên.</p>
+    <p>No teacher data available.</p>
 }
 else
 {
@@ -21,18 +21,18 @@ else
         <thead class="thead-dark">
             <tr>
                 <th>
-                    Họ và Tên
+                    Full Name
                 </th>
                 <th>
                     Email
                 </th>
                 <th>
-                    Chuyên Ngành
+                    Specialization
                 </th>
                 <th>
-                    Tên Đăng Nhập
+                    Username
                 </th>
-                <th>Hành động</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -49,15 +49,14 @@ else
                         @Html.DisplayFor(modelItem => item.Specialization)
                     </td>
                     <td>
-                        @* Kiểm tra để tránh lỗi nếu User không được load cùng *@
                         @(item.User?.Username ?? "N/A")
                     </td>
                     <td>
-                        @* Các link này cần được cài đặt trong tương lai *@
-                        @* <a asp-action="EditTeacher" asp-route-id="@item.Id" class="btn btn-sm btn-info">Sửa</a> |
-                        <a asp-action="DetailsTeacher" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Chi tiết</a> |
-                        <a asp-action="DeleteTeacher" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Xóa</a> *@
-                        <span>Chưa có hành động</span>
+                        @* These links need to be implemented in the future *@
+                        @* <a asp-action="EditTeacher" asp-route-id="@item.Id" class="btn btn-sm btn-info">Edit</a> |
+                        <a asp-action="DetailsTeacher" asp-route-id="@item.Id" class="btn btn-sm btn-secondary">Details</a> |
+                        <a asp-action="DeleteTeacher" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a> *@
+                        <span>No actions available</span>
                     </td>
                 </tr>
             }

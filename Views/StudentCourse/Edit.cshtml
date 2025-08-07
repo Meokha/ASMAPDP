@@ -1,7 +1,7 @@
 @model SIMS.Models.StudentCourse
 
 @{
-    ViewData["Title"] = "Chỉnh Sửa Phân Công";
+    ViewData["Title"] = "Assignment Edit";
     var students = ViewBag.Students as IEnumerable<SIMS.Models.Student>;
     var courses = ViewBag.Courses as IEnumerable<SIMS.Models.Course>;
 }
@@ -20,13 +20,12 @@
             <input type="hidden" name="originalCourseId" value="@Model.CourseId" />
 
             <div class="mb-3">
-                <label for="newStudentId" class="form-label">Sinh Viên</label>
+                <label for="newStudentId" class="form-label">Student</label>
                 <select name="newStudentId" class="form-select" required>
                     @if (students != null)
                     {
                         @foreach (var student in students)
                         {
-                            @* === BẮT ĐẦU PHẦN SỬA LỖI RZ1031 === *@
                             @if (Model.StudentId == student.Id)
                             {
                                 <option value="@student.Id" selected>@student.FullName (@student.StudentCode)</option>
@@ -35,20 +34,18 @@
                             {
                                 <option value="@student.Id">@student.FullName (@student.StudentCode)</option>
                             }
-                            @* === KẾT THÚC PHẦN SỬA LỖI RZ1031 === *@
                         }
                     }
                 </select>
             </div>
 
             <div class="mb-3">
-                <label for="newCourseId" class="form-label">Khóa Học</label>
+                <label for="newCourseId" class="form-label">Course</label>
                 <select name="newCourseId" class="form-select" required>
                     @if (courses != null)
                     {
                         @foreach (var course in courses)
                         {
-                            @* === BẮT ĐẦU PHẦN SỬA LỖI RZ1031 === *@
                             @if (Model.CourseId == course.Id)
                             {
                                 <option value="@course.Id" selected>@course.Name</option>
@@ -57,15 +54,14 @@
                             {
                                 <option value="@course.Id">@course.Name</option>
                             }
-                            @* === KẾT THÚC PHẦN SỬA LỖI RZ1031 === *@
                         }
                     }
                 </select>
             </div>
             
             <div class="form-group mt-4">
-                <input type="submit" value="Lưu Thay Đổi" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>

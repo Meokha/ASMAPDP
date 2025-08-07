@@ -76,18 +76,18 @@ namespace SIMS.Controllers
             if (!int.TryParse(userIdStr, out var userId)) return Unauthorized();
 
             var student = await _context.Students.FirstOrDefaultAsync(s => s.UserId == userId);
-            if (student == null) return NotFound("Không tìm thấy thông tin sinh viên.");
+            if (student == null) return NotFound("No student information found.");
 
             bool isEnrolled = await _context.StudentCourses.AnyAsync(sc => sc.StudentId == student.Id && sc.CourseId == courseId);
             if (!isEnrolled)
             {
                 _context.StudentCourses.Add(new StudentCourse { StudentId = student.Id, CourseId = courseId });
                 await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Đăng ký khóa học thành công!";
+                TempData["SuccessMessage"] = "Course enrollment successful!";
             }
             else
             {
-                TempData["ErrorMessage"] = "Bạn đã ở trong khóa học này.";
+                TempData["ErrorMessage"] = "You are already enrolled in this course.";
             }
 
             return RedirectToAction("Details", "Teacher", new { id = courseId });
@@ -133,7 +133,7 @@ public async Task<IActionResult> Edit(int originalStudentId, int originalCourseI
 {
     if (newStudentId <= 0 || newCourseId <= 0)
     {
-        ModelState.AddModelError("", "Vui lòng chọn cả sinh viên và khóa học.");
+        ModelState.AddModelError("", "Please select both student and course.");
          ViewBag.Students = await _context.Students.ToListAsync();
          ViewBag.Courses = await _context.Courses.ToListAsync();
          var originalAssignment = await _context.StudentCourses.FindAsync(originalStudentId, originalCourseId);
@@ -149,7 +149,7 @@ public async Task<IActionResult> Edit(int originalStudentId, int originalCourseI
 
     if (isNewAssignmentExist && (originalStudentId != newStudentId || originalCourseId != newCourseId))
     {
-         ModelState.AddModelError("", "Bản ghi gán này đã tồn tại.");
+         ModelState.AddModelError("", "This assignment already exists.");
     }
 
     if (ModelState.ErrorCount == 0)
